@@ -48,11 +48,13 @@
     border-radius: 3px;
     background-color: #f6f6f5;
     resize: none;
+    padding-top:15px;
+    padding-bottom: 15px;
 }
 
 .send-btn-container{
     padding: 0;
-    margin-top: 15px;
+    margin-top: 45px;
     display: flex;
     justify-content: end;
     align-items: center;
