@@ -7,15 +7,16 @@
     <title>Document</title>
     <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="styles/post.css">
+    <link rel="stylesheet" href="styles/global.css">
     <script src="https://kit.fontawesome.com/b6283481d8.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="header">
         <ul>
-            <li>Home</li>
-            <li>Categories</li>
-            <li>About</li>
-            <li>Contact</li>
+            <a href="/index.html"><li>Home</li></a>
+            <a href="/categories.html"><li>Categories</li></a>
+            <a href="/about.html"><li>About</li></a>
+            <a href="/contact.html"><li>Contact</li></a>
         </ul>
     </div>
     <div class="content">
@@ -28,13 +29,13 @@
                     <div class="post-header-info">
                         <span class="name">Melih Gulec</span>
                         <div class="post-header-about">
-                            <span class="date">August 22, 2017</span>
-                            <span class="date">Travel</span>
+                            <span class="date"><i class="fa-solid fa-calendar-week"></i>&nbsp;&nbsp;&nbsp;August 22, 2017</span>
+                            <i class="fa-solid fa-folder"></i>&nbsp;&nbsp;&nbsp;<span class="post-categorie-text"> Travel</span>
                         </div>
                     </div>
                 </div>
                 <div class="post-image">
-                    <img src="https://www.webtekno.com/images/editor/default/0003/28/a26df8878adbd996c53dad49324365fac282394d.jpeg" alt="" srcset="">
+                    <img src="https://dlcdnrog.asus.com/rog/media/1620398675998.jpg" alt="" srcset="">
                 </div>
                 <div class="post-content-info">
                     <h2>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad.</h2>
@@ -49,7 +50,60 @@
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                 </div>
             </div>
-            <div class="comment-section"></div>
+            <h1>Yorumlar.</h1>
+            <div class="comment-container">
+                <div class="comment-section">
+                    <div class="user-pp">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="comment-input-container">
+                        <textarea name="comment" id="comment" placeholder="Enter your comment."></textarea>
+                    </div>
+                </div>
+                <div class="send-btn-container">
+                    <button class="send-comment-btn">Send</button>
+                </div>
+                <h3>Tüm yorumlar</h3>
+                <hr width="100%" color="#e2e2e2">
+                <div class="user-comments">
+                    <div class="user-comment-container">
+                        <div class="user-comment-pp">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="user-comment-details">
+                            <div class="user-info">
+                                <h4>Ziyaretçi</h4>
+                                <label>&nbsp;- 8 gün önce</label>
+                            </div>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda molestiae quod voluptas quidem laboriosam repudiandae amet deleniti distinctio ducimus esse! Odit ratione, laboriosam, numquam beatae odio esse deleniti quos rem labore temporibus incidunt dolore distinctio dignissimos perferendis consequuntur soluta. Vitae facilis earum molestias impedit culpa voluptatum aliquam minus autem voluptates tempora odio eaque debitis enim dolorem atque possimus doloremque delectus provident a ratione id, commodi iusto sed fugit? Totam facilis est illo maiores voluptatibus eum, ullam nesciunt corrupti minus eveniet laudantium earum aperiam? Dolores similique culpa, delectus illum voluptas temporibus iusto sed rem enim non voluptates sunt quam excepturi nam!</p>
+                        </div>
+                    </div>
+                    <div class="user-comment-container">
+                        <div class="user-comment-pp">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="user-comment-details">
+                            <div class="user-info">
+                                <h4>Ziyaretçi</h4>
+                                <label>&nbsp;- 8 gün önce</label>
+                            </div>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda molestiae quod voluptas quidem laboriosam repudiandae amet deleniti distinctio ducimus esse! Odit ratione, laboriosam, numquam beatae odio esse deleniti quos rem labore temporibus incidunt dolore distinctio dignissimos perferendis consequuntur soluta. Vitae facilis earum molestias impedit culpa voluptatum aliquam minus autem voluptates tempora odio eaque debitis enim dolorem atque possimus doloremque delectus provident a ratione id, commodi iusto sed fugit? Totam facilis est illo maiores voluptatibus eum, ullam nesciunt corrupti minus eveniet laudantium earum aperiam? Dolores similique culpa, delectus illum voluptas temporibus iusto sed rem enim non voluptates sunt quam excepturi nam!</p>
+                        </div>
+                    </div>
+                    <div class="user-comment-container">
+                        <div class="user-comment-pp">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="user-comment-details">
+                            <div class="user-info">
+                                <h4>Ziyaretçi</h4>
+                                <label>&nbsp;- 8 gün önce</label>
+                            </div>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda molestiae quod voluptas quidem laboriosam repudiandae amet deleniti distinctio ducimus esse! Odit ratione, laboriosam, numquam beatae odio esse deleniti quos rem labore temporibus incidunt dolore distinctio dignissimos perferendis consequuntur soluta. Vitae facilis earum molestias impedit culpa voluptatum aliquam minus autem voluptates tempora odio eaque debitis enim dolorem atque possimus doloremque delectus provident a ratione id, commodi iusto sed fugit? Totam facilis est illo maiores voluptatibus eum, ullam nesciunt corrupti minus eveniet laudantium earum aperiam? Dolores similique culpa, delectus illum voluptas temporibus iusto sed rem enim non voluptates sunt quam excepturi nam!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="right-side">
             <div class="menu-item-container">
@@ -118,10 +172,10 @@
                 </div>
                 <div class="menu-item-content">
                     <div class="social-media-container">
-                        <div class="social-media-btn-container"><i class="fa-brands fa-facebook-square"></i></div>
-                        <div class="social-media-btn-container"><i class="fa-brands fa-youtube"></i></div>
-                        <div class="social-media-btn-container"><i class="fa-brands fa-pinterest"></i></div>
-                        <div class="social-media-btn-container"><i class="fa-brands fa-twitter"></i></div>
+                        <div class="social-media-btn-container"><i class="fa-brands fa-facebook-square" style="color:blue"></i></div>
+                        <div class="social-media-btn-container"><i class="fa-brands fa-youtube" style="color:red"></i></div>
+                        <div class="social-media-btn-container"><i class="fa-brands fa-pinterest" style="color:red"></i></div>
+                        <div class="social-media-btn-container"><i class="fa-brands fa-twitter" style="color:cornflowerblue;"></i></div>
                     </div>
                 </div>
             </div>
