@@ -7,101 +7,57 @@
     <title>Document</title>
     <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="styles/global.css">
-    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/categories.css">
     <script src="https://kit.fontawesome.com/b6283481d8.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="header">
         <ul>
-            <a href="/index.html" id="active-page"><li>Ana Sayfa</li></a>
-            <a href="/categories.html"><li>Kategoriler</li></a>
+            <a href="/index.html"><li>Ana Sayfa</li></a>
+            <a href="/categories.html" id="active-page"><li>Kategoriler</li></a>
             <a href="/contact.html"><li>İletişim</li></a>
         </ul>
     </div>
     <div class="content">
-        <div class="posts">
-            <div class="post-container">
-                <div class="post-header">
-                    <div class="post-pp" style="background-image: url('https://playtusu.com/wp-content/uploads/2021/11/avatar-the-last-airbender.jpg');">
-
+        <div class="categories-container">
+            <h1>Kategoriler.</h1>
+            <small id="categorie-counter">7 kategori listelenmektedir.</small>
+            <div class="categories-list">
+                <div class="categorie-container">
+                    <div class="categorie-icon-container">
+                        <i class="fa-solid fa-shirt"></i>
                     </div>
-                    <div class="post-header-info">
-                        <span class="name">Melih Gulec</span>
-                        <div class="post-header-about">
-                            <span class="date"><i class="fa-solid fa-calendar-week"></i>&nbsp;&nbsp;&nbsp;August 22, 2017</span>
-                            <i class="fa-solid fa-folder"></i>&nbsp;&nbsp;&nbsp;<span class="post-categorie-text"> Travel</span>
-                        </div>
+                    <span class="categorie-name">Fashion</span>
+                </div>
+                <div class="categorie-container">
+                    <div class="categorie-icon-container">
+                        <i class="fa-solid fa-star-of-life"></i>
                     </div>
+                    <span class="categorie-name">Lifestyle</span>
                 </div>
-                <div class="post-image">
-                    <img src="https://www.webtekno.com/images/editor/default/0003/28/a26df8878adbd996c53dad49324365fac282394d.jpeg" alt="" srcset="">
-                </div>
-                <div class="post-content-info">
-                    <h2>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad.</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis veritatis explicabo incidunt ullam voluptatum velit sint fuga praesentium quos facere.</p>
-                </div>
-                <div class="button-container">
-                    <button type="button" class="continue-read-btn" onclick="location.href='post.html'">OKUMAYA DEVAM ET</button>
-                </div>
-                <div class="post-share-container">
-                    <span class="share-text">Paylaş</span>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                </div>
-            </div>
-            <div class="post-container">
-                <div class="post-header">
-                    <div class="post-pp" style="background-image: url('https://playtusu.com/wp-content/uploads/2021/11/avatar-the-last-airbender.jpg');">
-
+                <div class="categorie-container">
+                    <div class="categorie-icon-container">
+                        <i class="fa-solid fa-car"></i>
                     </div>
-                    <div class="post-header-info">
-                        <span class="name">Melih Gulec</span>
-                        <div class="post-header-about">
-                            <span class="date"><i class="fa-solid fa-calendar-week"></i>&nbsp;&nbsp;&nbsp;August 22, 2017</span>
-                            <i class="fa-solid fa-folder"></i>&nbsp;&nbsp;&nbsp;<span class="post-categorie-text"> Travel</span>
-                        </div>
+                    <span class="categorie-name">Travel</span>
+                </div>
+                <div class="categorie-container">
+                    <div class="categorie-icon-container">
+                        <i class="fa-solid fa-gamepad"></i>
                     </div>
+                    <span class="categorie-name">Game</span>
                 </div>
-                <div class="post-image">
-                    <img src="https://images7.alphacoders.com/671/thumb-1920-671281.jpg" alt="" srcset="">
-                </div>
-                <div class="post-content-info">
-                    <h2>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad.</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis veritatis explicabo incidunt ullam voluptatum velit sint fuga praesentium quos facere.</p>
-                </div>
-                <div class="button-container">
-                    <button type="button" class="continue-read-btn" onclick="location.href='post.html'">OKUMAYA DEVAM ET</button>
-                </div>
-                <div class="post-share-container">
-                    <span class="share-text">Paylaş</span>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                </div>
-            </div>
-            <div class="post-container">
-                <div class="post-header">
-                    <div class="post-pp" style="background-image: url('https://playtusu.com/wp-content/uploads/2021/11/avatar-the-last-airbender.jpg');">
-
+                <div class="categorie-container">
+                    <div class="categorie-icon-container">
+                        <i class="fa-solid fa-person-skating"></i>
                     </div>
-                    <div class="post-header-info">
-                        <span class="name">Melih Gulec</span>
-                        <div class="post-header-about">
-                            <span class="date"><i class="fa-solid fa-calendar-week"></i>&nbsp;&nbsp;&nbsp;August 22, 2017</span>
-                            <i class="fa-solid fa-folder"></i>&nbsp;&nbsp;&nbsp;<span class="post-categorie-text"> Travel</span>
-                        </div>
+                    <span class="categorie-name">Skating</span>
+                </div>
+                <div class="categorie-container">
+                    <div class="categorie-icon-container">
+                        <i class="fa-solid fa-book-open-reader"></i>
                     </div>
-                </div>
-                <div class="post-image">
-                    <img src="https://dlcdnrog.asus.com/rog/media/1620398675998.jpg" alt="" srcset="">
-                </div>
-                <div class="post-content-info">
-                    <h2>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad.</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis veritatis explicabo incidunt ullam voluptatum velit sint fuga praesentium quos facere.</p>
-                </div>
-                <div class="button-container">
-                    <button type="button" class="continue-read-btn" onclick="location.href='post.html'">OKUMAYA DEVAM ET</button>
-                </div>
-                <div class="post-share-container">
-                    <span class="share-text">Paylaş</span>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                    <span class="categorie-name">Read</span>
                 </div>
             </div>
         </div>

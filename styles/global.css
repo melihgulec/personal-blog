@@ -52,7 +52,6 @@ body{
     padding-right: 220px;
     display: flex;
     flex-direction: row;
-    margin: 0 auto;
 }
 
 .posts{
@@ -296,6 +295,21 @@ body{
     border-radius: 100px;
     background-color: red;
     background-size: cover;
+}
+
+#active-page{
+    border-bottom: 2px solid #36d889;
+}
+
+@media only screen and (min-width: 2300px) {
+    .content{
+        margin:0 auto;
+        padding: 35px;
+        padding-left: 220px;
+        padding-right: 220px;
+        display: flex;
+        flex-direction: row;
+    }
 }
 
 @media only screen and (max-width: 1650px) {
