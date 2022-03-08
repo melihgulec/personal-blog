@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
-
 body{
     display: flex;
     justify-content: space-between;
@@ -54,128 +50,11 @@ body{
     flex-direction: row;
 }
 
-.posts{
-    display: flex;
-    flex-direction: column;
-    flex:3;
-    padding: 15px;
-}
-
-.post-container{
-    max-width: 800px;
-    padding-bottom: 15px;
-}
-
-.post-header{
-    display: flex;
-    justify-content: row;
-    align-items: center;
-    justify-content: start;
-    font-size: 14px;
-}
-
-.post-pp{
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    background-color: white;
-    background-size: cover;
-}
-
-.post-header-info{
-    display: flex;
-    flex-direction: column;
-    padding-left: 15px;
-}
-
-.post-header-info .name{
-    font-weight: bold;
-    font-size: 16px;
-    padding-bottom: 5px;
-}
-
-.post-header-about{
-    display: flex;
-    flex-direction: row;
-    color:grey;
-}
-
-.post-header-about span{
-    padding-right: 15px;
-}
-
-.post-image{
-    margin-top: 20px;
-}
-
-.post-image img{
-    width: 100%;
-    height: auto;
-    border-radius: 3px;
-}
-
-.post-content-info{
-    display: flex;
-    flex-direction: column;
-}
-
-.post-content-info p{
-    margin:0;
-}
-
-.post-categorie-text{
-    color: #36d889;
-    font-weight: bold;
-}
-
-.button-container{
-    margin-top: 25px;
-}
-
-.button-container button:hover{
-    cursor: pointer;
-}
-
-.continue-read-btn{
-    background-color: #fff; /* Green */
-    border: 1px solid #e2e2e2;
-    border-radius:3px;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    font-weight: bold;
-    color: #36d889;
-    letter-spacing: 3px;
-}
-
-.post-share-container{
-    transition: 200ms ease-in-out;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: end;
-    margin-top: 25px;
-    margin-bottom: 25px;
-}
-
-.post-share-container *{
-    padding-left: 15px;
-}
-
-.post-share-container:hover{
-    cursor: pointer;
-    color: #36d889;
-}
-
 .right-side{
     display: flex;
     flex-direction: column;
     flex:1;
 }
-
 
 .search-container{
     height: 60px;
