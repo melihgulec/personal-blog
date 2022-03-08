@@ -1,0 +1,89 @@
+.form-container{
+    display: flex;
+    flex-direction: column;
+    flex:3;
+    padding: 15px;
+}
+
+.form-container form{
+    display: flex;
+    flex-direction: column;
+    padding-right: 300px;
+}
+
+.form-container label{
+    font-weight: bold;
+    font-size: 21px;
+}
+
+.form-container label:nth-child(n+2){
+    margin-top: 25px;
+}
+
+.form-container input, textarea{
+    outline: none;
+    margin-top: 15px;
+    width: 100%;
+    height: 50px;
+    text-indent: 15px;
+    border:1px solid #eee;
+    border-radius: 3px;
+    transition: 200ms ease-in-out;
+    padding: 0;
+}
+
+.form-container input[type="text"]:focus, textarea:focus{
+    background-color: #f6f6f5;
+
+}
+
+.form-container textarea{
+    padding-top: 25px;
+    text-indent: 15px;
+    resize: none;
+    height: 250px;
+}
+
+.form-container p{
+    margin:0;
+    margin-top: 25px;
+    margin-bottom: 50px;
+}
+
+.form-container button{
+    margin-top: 35px;
+    width: 250px;
+    height: 60px;
+    outline: none;
+    background-color: #000;
+    border: 0;
+    border-radius: 5px;
+    letter-spacing: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    transition: 150ms ease-in-out;
+}
+
+.form-container button:hover{
+    background-color: rgb(43, 43, 43);
+}
+
+@media only screen and (max-width: 2300px) {
+    .form-container form{
+        padding-right: 100px;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .form-container form{
+        padding-right: 80px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .form-container form{
+        padding:0;
+    }
+}
