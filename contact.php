@@ -1,3 +1,7 @@
+<?php
+include './scripts/connection.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +17,9 @@
 <body>
     <div class="header">
         <ul>
-            <a href="/index.html"><li>Ana Sayfa</li></a>
-            <a href="/categories.html"><li>Kategoriler</li></a>
-            <a href="/contact.html" id="active-page"><li>İletişim</li></a>
+            <a href="/personalblog/index.php"><li>Ana Sayfa</li></a>
+            <a href="/personalblog/categories.php"><li>Kategoriler</li></a>
+            <a href="/personalblog/contact.php" id="active-page"><li>İletişim</li></a>
         </ul>
     </div>
     <div class="content">
@@ -42,11 +46,23 @@
                 <div class="menu-item-content">
                     <div class="about-me-container">
                         <div class="about-me-pp" style="background-image: url('https://playtusu.com/wp-content/uploads/2021/11/avatar-the-last-airbender.jpg');"></div>
-                        <h3>Melih GÜLEÇ</h3>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis delectus nam dolores in molestias provident quibusdam, sed dicta eos quas?</p>
+                            <?php
+
+                                $adminQuery = $connection->query("SELECT * FROM user WHERE RoleID=1");
+                                $adminRow = $adminQuery->fetch_assoc();
+
+                                $adminInfoQuery = $connection->query("SELECT * FROM admininfo WHERE user_id = ".$adminRow['id']." ");
+                                $adminInfoRow = $adminInfoQuery->fetch_assoc();
+
+                                echo '
+                                <h3>'.$adminRow['Name']." ".$adminRow['Surname'].'</h3>
+                                <p>'.$adminInfoRow['Description'].'</p>
+                                ';
+
+                            ?>
+                        </div>
                     </div>
                 </div>
-            </div>
             <div class="menu-item-container">
                 <div class="search-container">
                     <input type="text" name="search" id="search" placeholder="Enter Keywords..." />
@@ -57,42 +73,25 @@
                     <h3>Kategoriler</h3>
                 </div>
                 <div class="menu-item-content">
-                    <div class="categories-item-container">
-                        <div class="categories-item-head">
-                            <i class="fa-solid fa-chevron-right"></i>&emsp;Fashion
-                        </div>
-                        <div class="categories-item-counter">7</div>
-                    </div>
-                    <div class="categories-item-container">
-                        <div class="categories-item-head">
-                            <i class="fa-solid fa-chevron-right"></i>&emsp;Lifestyle
-                        </div>
-                        <div class="categories-item-counter">12</div>
-                    </div>
-                    <div class="categories-item-container">
-                        <div class="categories-item-head">
-                            <i class="fa-solid fa-chevron-right"></i>&emsp;Travel
-                        </div>
-                        <div class="categories-item-counter">5</div>
-                    </div>
-                    <div class="categories-item-container">
-                        <div class="categories-item-head">
-                            <i class="fa-solid fa-chevron-right"></i>&emsp;Game
-                        </div>
-                        <div class="categories-item-counter">4</div>
-                    </div>
-                    <div class="categories-item-container">
-                        <div class="categories-item-head">
-                            <i class="fa-solid fa-chevron-right"></i>&emsp;Skating
-                        </div>
-                        <div class="categories-item-counter">25</div>
-                    </div>
-                    <div class="categories-item-container">
-                        <div class="categories-item-head">
-                            <i class="fa-solid fa-chevron-right"></i>&emsp;Read
-                        </div>
-                        <div class="categories-item-counter">35</div>
-                    </div>
+                <?php
+                        $categoriesQuery = $connection->query("SELECT * FROM categories");
+
+                        while($categorieRow = $categoriesQuery->fetch_assoc()){
+                            $categoriePostCountQuery = $connection->query("SELECT COUNT(*) as totalCount FROM post WHERE categorie_id = ".$categorieRow['id']."");
+                            $result = $categoriePostCountQuery->fetch_assoc();
+
+                            echo '
+                        
+                            <div class="categories-item-container" onclick="location.href=\'categorie.php?categorie_id='.$categorieRow['id'].'\'">
+                            <div class="categories-item-head">
+                                <i class="fa-solid fa-chevron-right"></i>&emsp;'.$categorieRow['Name'].'
+                            </div>
+                            <div class="categories-item-counter">'.$result['totalCount'].'</div>
+                            </div>
+    
+                            ';
+                        }
+                    ?>
                 </div>
             </div>
             <div class="menu-item-container">
