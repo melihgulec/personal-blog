@@ -1,0 +1,55 @@
+.content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-top: 15px;
+}
+
+.content h3{
+    margin-bottom: 25px;
+}
+
+.categoriesContainer{
+    width: 100%;
+    border: 1px solid black;
+    padding: 15px 0 15px 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content .categoriesContainer:not(:first-child){
+    margin-top: 35px;
+}
+
+.categorieInfo{
+    display: flex;
+    flex-direction: column;
+}
+
+.categorieInfo label:first-child{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.categorieInfo label:nth-child(2n){
+    margin-top: 10px;
+}
+
+.iconGroup{
+    font-size: 25px;
+}
+
+.iconGroup i{
+    padding-right: 25px;
+}
+
+.iconGroup i:first-child{
+    color: #36d889;
+}
+
+.iconGroup i:nth-child(2n){
+    color: red;
+}

@@ -5,13 +5,6 @@
     padding: 15px;
 }
 
-.posts{
-    display: flex;
-    flex-direction: column;
-    flex:3;
-    padding: 15px;
-}
-
 .post-container{
     max-width: 800px;
     padding-bottom: 15px;

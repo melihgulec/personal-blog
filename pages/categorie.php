@@ -1,5 +1,8 @@
 <?php
-include './scripts/connection.php';
+include("../components/header.php");
+include '../scripts/connection.php';
+$categorie_id = $_GET['categorie_id'];
+$post_query = $connection->query("SELECT * FROM post WHERE categorie_id = ".$categorie_id." ");
 ?>
 
 <!DOCTYPE html>
@@ -8,35 +11,59 @@ include './scripts/connection.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İletişim</title>
-    <link rel="stylesheet" href="styles/normalize.css">
-    <link rel="stylesheet" href="styles/global.css">
-    <link rel="stylesheet" href="styles/contact.css">
+    <title>Ana Sayfa</title>
+    <link rel="stylesheet" href="../styles/normalize.css">
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/index.css">
     <script src="https://kit.fontawesome.com/b6283481d8.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="header">
-        <ul>
-            <a href="/personalblog/index.php"><li>Ana Sayfa</li></a>
-            <a href="/personalblog/categories.php"><li>Kategoriler</li></a>
-            <a href="/personalblog/contact.php" id="active-page"><li>İletişim</li></a>
-        </ul>
-    </div>
+    <?php includeHeader($pageIndexes['categoriesPage']); ?>
     <div class="content">
-        <div class="form-container">
-            <h1>İletişim.</h1>
-            <p>Benimle iletişime geçmek için aşağıdaki formu doldurabilirsiniz.</p>
-            <form action="" method="post">
-                <label for="userName">Adınız</label>
-                <input type="text" name="userName" id="userName">
-                <label for="mail">E-Posta</label>
-                <input type="text" name="userMail" id="userMail">
-                <label for="subject">Konu</label>
-                <input type="text" name="subject" id="subject">
-                <label for="message">İleti</label>
-                <textarea id="message"></textarea>
-                <button type="submit">GÖNDER</button>
-            </form>
+        <div class="posts">
+            <?php 
+                while($row = $post_query->fetch_assoc()){
+                    $user_query = $connection->query("SELECT * FROM user WHERE id = '".$row['user_id']."'");
+                    $userRow = $user_query->fetch_assoc();
+
+                    $categorie_query = $connection->query("SELECT * FROM categories WHERE id = '".$row['categorie_id']."'");
+                    $categorieRow = $categorie_query->fetch_assoc();
+
+                    $description = $row['Description'];
+                    $description = (strlen($description) > 180) ? substr($description,0,180).'...' : $description;
+
+                    echo '
+                    <div class="post-container">
+                    <div class="post-header">
+                        <div class="post-pp" style="background-image: url(\'https://playtusu.com/wp-content/uploads/2021/11/avatar-the-last-airbender.jpg\');">
+                        </div>
+                        <div class="post-header-info">
+                            <span class="name">'.$userRow['Name']." ".$userRow['Surname'].'</span>
+                            <div class="post-header-about">
+                                <span class="date"><i class="fa-solid fa-calendar-week"></i>&nbsp;&nbsp;&nbsp;'.date('F d, Y', strtotime($row['Date'])).'</span>
+                                <i class="fa-solid fa-folder"></i>&nbsp;&nbsp;&nbsp;<span class="post-categorie-text">'.$categorieRow['Name'].'</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-image">
+                        <img src="../post/images/'.$row['image'].'" alt="" srcset="">
+                    </div>
+                    <div class="post-content-info">
+                        <h2>'.$row['Title'].'</h2>
+                        <p>'.$description.'</p>
+                    </div>
+                    <div class="button-container">
+                        <button type="button" class="continue-read-btn" onclick="location.href=\'post.php?post_id='.$row['id'].'\'">OKUMAYA DEVAM ET</button>
+                    </div>
+                    <div class="post-share-container">
+                        <span class="share-text">Paylaş</span>
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                </div>
+                    ';
+                };
+                
+            ?>
         </div>
         <div class="right-side">
             <div class="menu-item-container">
@@ -73,9 +100,9 @@ include './scripts/connection.php';
                     <h3>Kategoriler</h3>
                 </div>
                 <div class="menu-item-content">
-                <?php
+                    <?php
                         $categoriesQuery = $connection->query("SELECT * FROM categories");
-
+                        
                         while($categorieRow = $categoriesQuery->fetch_assoc()){
                             $categoriePostCountQuery = $connection->query("SELECT COUNT(*) as totalCount FROM post WHERE categorie_id = ".$categorieRow['id']."");
                             $result = $categoriePostCountQuery->fetch_assoc();

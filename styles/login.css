@@ -1,0 +1,125 @@
+html, body{
+    height: 100%;
+}
+
+.mainContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    width: 520px;
+    border: 2px solid #eee;
+    padding: 40px 40px 40px 40px;
+}
+
+.headLabel{
+    font-weight: bold;
+    color: black;
+    font-size: 32px;
+}
+
+.inputLabel{
+    letter-spacing: 1.2px;
+    font-size: 14px;
+}
+
+.inputGroup{
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.loginContainer input{
+    width: 100%;
+    height: 38px;
+    border:1px solid #eee;
+    text-indent: 8px;
+    margin-top: 12px;
+    transition: 100ms ease-in-out;
+}
+
+*:focus{
+    outline: none;
+}
+
+.loginContainer input:focus{
+    background-color: #eee;
+}
+
+.bottomGroup{
+    margin-top:40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bottomGroup .boldFont{
+    font-weight: bold;
+}
+
+.bottomGroup .boldFont:hover{
+    cursor: pointer;
+}
+
+.rememberMeGroup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.rememberMeGroup input{
+    margin:0;
+    width: 18px;
+    height: 18px;
+}
+
+.rememberMeGroup label
+{
+    padding-left:15px;
+}
+
+.buttonContainer{
+    margin-top: 40px;
+    width: 100%;
+}
+
+.loginButton{
+    width: 100%;
+    height: 50px;
+    background-color: #36d889;
+    border: 0;
+    border-radius: 2px;
+    color: #fff;
+    font-weight: bold;
+    transition: 120ms ease-in-out;
+}
+
+.loginButton:hover{
+    cursor: pointer;
+    background-color: #29c077;
+}
+
+.loginFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    width: 100%;
+    margin-top: 25px;
+    cursor: pointer;
+}
+
+.loginFooter .inputLabel{
+    cursor: pointer;
+}
