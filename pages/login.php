@@ -12,47 +12,56 @@ include('../scripts/connection.php');
     <title>Ana Sayfa</title>
     <link rel="stylesheet" href="../styles/normalize.css">
     <link rel="stylesheet" href="../styles/global.css">
-    <link rel="stylesheet" href="../styles/login.css">
     <script src="https://kit.fontawesome.com/b6283481d8.js" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="../styles/login.css">
+    <script>
+        function SubmitFormData() {
+            var email = $("#email").val();
+            var password = $("#password").val();
+            $.post("../scripts/loginCheck.php", { email: email, password: password},
+                function(data) {
+                    $('#results').html(data);
+            });
+        }
+    </script>
 </head>
 <body>
     <?php includeHeader($pageIndexes['loginPage']); ?>
     <div class="content">
         <div class="mainContainer">
-            <div class="loginContainer">
-                <label class="headLabel">GİRİŞ</label>
-                <div class="inputGroup">
-                    <label class="inputLabel">E-Mail Address</label>
-                    <input type="text" name="username" id="username">
-                </div>
-                <div class="inputGroup">
-                    <label class="inputLabel">Password</label>
-                    <input type="password" name="password" id="password">
-                </div>
-                <div class="bottomGroup">
-                    <div class="rememberMeGroup">
-                        <input type="checkbox" name="rememberme" id="rememberme">
-                        <label class="inputLabel">Beni Hatırla</label>
+            <form action="../scripts/loginCheck.php" method="post">
+                <div class="loginContainer">
+                    <label class="headLabel">GİRİŞ</label>
+                    <div class="inputGroup">
+                        <label class="inputLabel">E-Mail Address</label>
+                        <input type="text" name="email" id="email">
                     </div>
-                    <label for="" class="inputLabel boldFont">Şifremi Unuttum</label>
+                    <div class="inputGroup">
+                        <label class="inputLabel">Password</label>
+                        <input type="password" name="password" id="password">
+                    </div>
+                    <div class="bottomGroup">
+                        <div class="rememberMeGroup">
+                            <input type="checkbox" name="rememberme" id="rememberme">
+                            <label class="inputLabel">Beni Hatırla</label>
+                        </div>
+                        <label for="" class="inputLabel boldFont">Şifremi Unuttum</label>
+                    </div>
+                    <div class="buttonContainer">
+                        <input type="button" class="loginButton" onclick="SubmitFormData()" value="LOGIN" />
+                    </div>
+                    <div class="loginFooter">
+                        <a href="register.php">
+                            <label for="" class="inputLabel">Hesabın yok mu? <b>Kayıt ol.</b></label>
+                        </a>
+                    </div>
                 </div>
-                <div class="buttonContainer">
-                    <button class="loginButton">LOGIN</button>
-                </div>
-                <div class="loginFooter">
-                    <label for="" class="inputLabel">Hesabın yok mu? <b>Kayıt ol.</b></label>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
-    <div class="footer">
-        <p>2022 Tüm hakları saklıdır. Melih GÜLEÇ tarafından oluşturulmuştur.</p>
-        <div class="social-media-container">
-            <div class="social-media-btn-container"><i class="fa-brands fa-facebook"></i></div>
-            <div class="social-media-btn-container"><i class="fa-brands fa-youtube"></i></div>
-            <div class="social-media-btn-container"><i class="fa-brands fa-pinterest"></i></div>
-            <div class="social-media-btn-container"><i class="fa-brands fa-twitter"></i></div>
-        </div>
-    </div>
+    <div id="results"></div>
+    <?php include("../components/footer.php") ?>
 </body>
 </html>

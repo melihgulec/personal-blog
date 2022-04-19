@@ -5,6 +5,7 @@ $pageIndexes = array(
     'categoriesPage' => 1,
     'contactPage'    => 2,
     'loginPage'      => 3,
+    'registerPage'   => 4
 );
 
 function includeHeader($pageIndex){
@@ -49,6 +50,19 @@ function includeHeader($pageIndex){
             break;
 
         case 3:
+            echo '
+            <div class="header">
+                    <ul>
+                        <a href="/personalblog/pages/index.php"><li>Ana Sayfa</li></a>
+                        <a href="/personalblog/pages/categories.php"><li>Kategoriler</li></a>
+                        <a href="/personalblog/pages/contact.php"><li>İletişim</li></a>
+                        <a href="/personalblog/pages/login.php" id="active-page"><li>Kullanıcı</li></a>
+                    </ul>
+                </div>
+            ';
+            break;
+            
+        case 4:
             echo '
             <div class="header">
                     <ul>
