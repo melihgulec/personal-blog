@@ -1,15 +1,15 @@
 <?php
-//userName: userName, userSurname: userSurname, userMail: userMail, password: password, dateOfBirth: dateOfBirth
 
             $userName = $_POST["userName"];
             $userSurname = $_POST["userSurname"];
             $userMail = $_POST["userMail"];
-            $password = $_POST["password"];
+            $userPassword = $_POST["userPassword"];
             $dateOfBirth = $_POST["dateOfBirth"];
             
             include("../scripts/connection.php");
 
-            if($userName === "" || $userSurname === "" || $userMail === "" || $password === "" || $dateOfBirth === "" ){
+            if($userName === "" || $userSurname === "" || $userMail === "" || $userPassword === "" || $dateOfBirth === "" ){
+                echo $userName.' - '.$userSurname.' - '.$userMail.' - '.$userPassword.' - '.$dateOfBirth;
                 echo '<script>
                 Swal.fire({
                     heightAuto: false,
@@ -23,7 +23,7 @@
             }
 
 
-            $userQuery = $connection->query("SELECT * FROM user WHERE Email = '".$userMail."' AND password = '".$password."'");
+            $userQuery = $connection->query("SELECT * FROM user WHERE Email = '".$userMail."' AND password = '".$userPassword."'");
             $row = $userQuery->num_rows;
             $userDetails = $userQuery->fetch_assoc();
 
@@ -34,7 +34,7 @@
                     '".$userName."',
                     '".$userSurname."',
                     '".$userMail."',
-                    '".$password."',
+                    '".$userPassword."',
                     '".$dateOfBirth."',
                     '2',
                     'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png'

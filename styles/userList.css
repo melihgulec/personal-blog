@@ -72,3 +72,7 @@
 .iconGroup i:nth-child(2n){
     color: red;
 }
+
+.iconGroup i:first-child:hover, i:nth-child(2n):hover{
+    cursor: pointer;
+}

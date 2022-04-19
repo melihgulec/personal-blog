@@ -21,9 +21,9 @@ include('../scripts/connection.php');
             var userName = $("#userName").val();
             var userSurname = $("#userSurname").val();
             var userMail = $("#userMail").val();
-            var password = $("#password").val();
+            var userPassword = $("#userPassword").val();
             var dateOfBirth = $("#dateOfBirth").val();
-            $.post("../scripts/userRegister.php", { userName: userName, userSurname: userSurname, userMail: userMail, password: password, dateOfBirth: dateOfBirth},
+            $.post("../scripts/userRegister.php", { userName: userName, userSurname: userSurname, userMail: userMail, userPassword: userPassword, dateOfBirth: dateOfBirth},
                 function(data) {
                     $('#results').html(data);
             });
@@ -42,8 +42,8 @@ include('../scripts/connection.php');
                 <input type="text" name="userSurname" id="userSurname">
                 <label for="userMail" class="inputLabel">E-Posta</label>
                 <input type="text" name="userMail" id="userMail">
-                <label for="password" class="inputLabel">Parola</label>
-                <input type="password" name="password" id="password">
+                <label for="userPassword" class="inputLabel">Parola</label>
+                <input type="userPassword" name="userPassword" id="userPassword">
                 <label for="dateOfBirth" class="inputLabel">Doğum Tarihi</label>
                 <input type="text" name="dateOfBirth" id="dateOfBirth">
                 <input type="button" value="KAYIT OL" onclick="SubmitFormData()">

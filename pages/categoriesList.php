@@ -17,6 +17,16 @@ $categories_query = $connection->query("SELECT * FROM categories");
     <link rel="stylesheet" href="../styles/panel.css">
     <link rel="stylesheet" href="../styles/categoriesList.css">
     <script src="https://kit.fontawesome.com/b6283481d8.js" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function deleteCategorie(categorieId) {
+            $.post("../scripts/panelCategorieDelete.php", {categorieId: categorieId},
+                function(data) {
+                    $('#results').html(data);
+            });
+        }
+    </script>
 </head>
 <body>
     <?php include("../components/sideBar.php") ?>    
@@ -32,13 +42,13 @@ $categories_query = $connection->query("SELECT * FROM categories");
                     </div>
                     <div class="iconGroup">
                         <i class="fa-solid fa-pen-to-square"></i>
-                        <i class="fa-solid fa-trash"></i>
+                        <i class="fa-solid fa-trash" onclick="deleteCategorie('.$categorie['id'].')"></i>
                     </div>
                 </div>
                 ';
             }
         ?>
-        
     </div>
+    <div id="results"></div>
 </body>
 </html>

@@ -17,6 +17,16 @@ $users_query = $connection->query("SELECT * FROM user");
     <link rel="stylesheet" href="../styles/panel.css">
     <link rel="stylesheet" href="../styles/userList.css">
     <script src="https://kit.fontawesome.com/b6283481d8.js" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function deleteUser(userId) {
+            $.post("../scripts/panelUserDelete.php", {userId: userId},
+                function(data) {
+                    $('#results').html(data);
+            });
+        }
+    </script>
 </head>
 <body>
     <?php include("../components/sideBar.php") ?>    
@@ -36,7 +46,7 @@ $users_query = $connection->query("SELECT * FROM user");
                     </div>
                     <div class="iconGroup">
                         <i class="fa-solid fa-pen-to-square"></i>
-                        <i class="fa-solid fa-trash"></i>
+                        <i class="fa-solid fa-trash" onclick="deleteUser('.$user['id'].')"></i>
                     </div>
                 </div>
                 ';
@@ -44,5 +54,6 @@ $users_query = $connection->query("SELECT * FROM user");
         ?>
         
     </div>
+    <div id="results"></div>
 </body>
 </html>
