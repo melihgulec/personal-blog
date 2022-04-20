@@ -22,6 +22,10 @@ $post_query = $connection->query("SELECT * FROM post WHERE categorie_id = ".$cat
     <div class="content">
         <div class="posts">
             <?php 
+                if($post_query->num_rows === 0){
+                    echo 'Henüz bu kategoriye ait bir gönderi eklenmemiş!';
+                }
+
                 while($row = $post_query->fetch_assoc()){
                     $user_query = $connection->query("SELECT * FROM user WHERE id = '".$row['user_id']."'");
                     $userRow = $user_query->fetch_assoc();
@@ -35,8 +39,7 @@ $post_query = $connection->query("SELECT * FROM post WHERE categorie_id = ".$cat
                     echo '
                     <div class="post-container">
                     <div class="post-header">
-                        <div class="post-pp" style="background-image: url(\'https://playtusu.com/wp-content/uploads/2021/11/avatar-the-last-airbender.jpg\');">
-                        </div>
+                        <img class="post-pp" src="../assets/user/images/'.$userRow['image'].'" alt="" srcset="">
                         <div class="post-header-info">
                             <span class="name">'.$userRow['Name']." ".$userRow['Surname'].'</span>
                             <div class="post-header-about">
@@ -46,7 +49,7 @@ $post_query = $connection->query("SELECT * FROM post WHERE categorie_id = ".$cat
                         </div>
                     </div>
                     <div class="post-image">
-                        <img src="../post/images/'.$row['image'].'" alt="" srcset="">
+                        <img src="../assets/post/images/'.$row['image'].'" alt="" srcset="">
                     </div>
                     <div class="post-content-info">
                         <h2>'.$row['Title'].'</h2>
@@ -72,24 +75,28 @@ $post_query = $connection->query("SELECT * FROM post WHERE categorie_id = ".$cat
                 </div>
                 <div class="menu-item-content">
                     <div class="about-me-container">
-                        <div class="about-me-pp" style="background-image: url('https://playtusu.com/wp-content/uploads/2021/11/avatar-the-last-airbender.jpg');"></div>
-                            <?php
+                        <?php
 
-                                $adminQuery = $connection->query("SELECT * FROM user WHERE RoleID=1");
-                                $adminRow = $adminQuery->fetch_assoc();
+                            $adminQuery = $connection->query("SELECT * FROM user WHERE RoleID=1");
+                            $adminRow = $adminQuery->fetch_assoc();
 
-                                $adminInfoQuery = $connection->query("SELECT * FROM admininfo WHERE user_id = ".$adminRow['id']." ");
-                                $adminInfoRow = $adminInfoQuery->fetch_assoc();
+                            $adminInfoQuery = $connection->query("SELECT * FROM admininfo WHERE user_id = ".$adminRow['id']." ");
+                            $adminInfoRow = $adminInfoQuery->fetch_assoc();
 
-                                echo '
-                                <h3>'.$adminRow['Name']." ".$adminRow['Surname'].'</h3>
-                                <p>'.$adminInfoRow['Description'].'</p>
-                                ';
+                        
+                            $imread = "../assets/user/images/".$adminRow["image"];
 
-                            ?>
-                        </div>
+                            echo '<img class="about-me-pp" src="'.$imread.'" alt="" srcset="">';
+
+                            echo '
+                            <h3>'.$adminRow['Name']." ".$adminRow['Surname'].'</h3>
+                            <p>'.$adminInfoRow['Description'].'</p>
+                            ';
+
+                        ?>
                     </div>
                 </div>
+            </div>
             <div class="menu-item-container">
                 <div class="search-container">
                     <input type="text" name="search" id="search" placeholder="Enter Keywords..." />
@@ -100,9 +107,9 @@ $post_query = $connection->query("SELECT * FROM post WHERE categorie_id = ".$cat
                     <h3>Kategoriler</h3>
                 </div>
                 <div class="menu-item-content">
-                    <?php
+                <?php
                         $categoriesQuery = $connection->query("SELECT * FROM categories");
-                        
+
                         while($categorieRow = $categoriesQuery->fetch_assoc()){
                             $categoriePostCountQuery = $connection->query("SELECT COUNT(*) as totalCount FROM post WHERE categorie_id = ".$categorieRow['id']."");
                             $result = $categoriePostCountQuery->fetch_assoc();

@@ -41,42 +41,42 @@ $post_query = $connection->query("SELECT * FROM post WHERE id = ".$postId." ");
 
                     $row = $post_query->fetch_assoc();
 
-                    $user_query = $connection->query("SELECT * FROM user WHERE id = '".$row['user_id']."'");
-                    $userRow = $user_query->fetch_assoc();
+                    if($post_query -> num_rows === 0){
+                        echo 'Gönderi bulunamadı.';
+                        exit();
+                    }else{
+                        $user_query = $connection->query("SELECT * FROM user WHERE id = '".$row['user_id']."'");
+                        $userRow = $user_query->fetch_assoc();
 
-                    $categorie_query = $connection->query("SELECT * FROM categories WHERE id = '".$row['categorie_id']."'");
-                    $categorieRow = $categorie_query->fetch_assoc();
+                        $categorie_query = $connection->query("SELECT * FROM categories WHERE id = '".$row['categorie_id']."'");
+                        $categorieRow = $categorie_query->fetch_assoc();
 
-                    echo '
-
-                    <div class="post-header">
-                    <div class="post-pp" style="background-image: url(\'https://playtusu.com/wp-content/uploads/2021/11/avatar-the-last-airbender.jpg\');">
-
-                    </div>
-                    <div class="post-header-info">
-                        <span class="name">'.$userRow['Name']." ".$userRow['Surname'].'</span>
-                        <div class="post-header-about">
-                            <span class="date"><i class="fa-solid fa-calendar-week"></i>&nbsp;&nbsp;&nbsp;'.date('F d, Y', strtotime($row['Date'])).'</span>
-                            <i class="fa-solid fa-folder"></i>&nbsp;&nbsp;&nbsp;<span class="post-categorie-text">'.$categorieRow['Name'].'</span>
+                        echo '
+                        <div class="post-header">
+                        <img class="post-pp" src="../assets/user/images/'.$userRow['image'].'" alt="" srcset="">
+                        <div class="post-header-info">
+                            <span class="name">'.$userRow['Name']." ".$userRow['Surname'].'</span>
+                            <div class="post-header-about">
+                                <span class="date"><i class="fa-solid fa-calendar-week"></i>&nbsp;&nbsp;&nbsp;'.date('F d, Y', strtotime($row['Date'])).'</span>
+                                <i class="fa-solid fa-folder"></i>&nbsp;&nbsp;&nbsp;<span class="post-categorie-text">'.$categorieRow['Name'].'</span>
+                            </div>
                         </div>
-                    </div>
-                    </div>
-                    <div class="post-image">
-                        <img src="../post/images/'.$row['image'].'" alt="" srcset="">
-                    </div>
-                    <div class="post-content-info">
-                        <h2>'.$row['Title'].'</h2>
-                        <p>
-                            '.$row['Description'].'
-                        </p>
-                    </div>
-                    <div class="post-share-container" onclick="navigator.clipboard.writeText(window.location)">
-                        <span class="share-text">Paylaş</span>
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </div>
-                    
-                    ';
-
+                        </div>
+                        <div class="post-image">
+                            <img src="../assets/post/images/'.$row['image'].'" alt="" srcset="">
+                        </div>
+                        <div class="post-content-info">
+                            <h2>'.$row['Title'].'</h2>
+                            <p>
+                                '.$row['Description'].'
+                            </p>
+                        </div>
+                        <div class="post-share-container" onclick="navigator.clipboard.writeText(window.location)">
+                            <span class="share-text">Paylaş</span>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                        ';
+                    }
                 ?>
             </div>
             <h1>Yorumlar.</h1>
@@ -101,6 +101,10 @@ $post_query = $connection->query("SELECT * FROM post WHERE id = ".$postId." ");
                         $commentQuery = $connection->query("SELECT * FROM comment WHERE post_id = ".$postId." ");
                         $commentUserQuery = $connection->query("SELECT * FROM user INNER JOIN comment ON user.id = comment.user_id WHERE post_id = ".$postId." ");
                         
+                        if($commentQuery->num_rows === 0){
+                            echo 'Bu gönderiye hiçbir yorum yapılmamış.';
+                        }
+
                         while($user = $commentUserQuery->fetch_assoc()){
 
                             $commentRow = $commentQuery->fetch_assoc();
@@ -131,7 +135,6 @@ $post_query = $connection->query("SELECT * FROM post WHERE id = ".$postId." ");
                 </div>
                 <div class="menu-item-content">
                     <div class="about-me-container">
-                        <div class="about-me-pp" style="background-image: url('https://playtusu.com/wp-content/uploads/2021/11/avatar-the-last-airbender.jpg');"></div>
                         <?php
 
                             $adminQuery = $connection->query("SELECT * FROM user WHERE RoleID=1");
@@ -139,6 +142,11 @@ $post_query = $connection->query("SELECT * FROM post WHERE id = ".$postId." ");
 
                             $adminInfoQuery = $connection->query("SELECT * FROM admininfo WHERE user_id = ".$adminRow['id']." ");
                             $adminInfoRow = $adminInfoQuery->fetch_assoc();
+
+                        
+                            $imread = "../assets/user/images/".$adminRow["image"];
+
+                            echo '<img class="about-me-pp" src="'.$imread.'" alt="" srcset="">';
 
                             echo '
                             <h3>'.$adminRow['Name']." ".$adminRow['Surname'].'</h3>

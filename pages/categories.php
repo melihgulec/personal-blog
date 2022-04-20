@@ -26,6 +26,10 @@ $allCategoryCount=$categoriesQueryCount->fetch_assoc();
             <small id="categorie-counter"><?php echo $allCategoryCount['totalCount'] ?> kategori listelenmektedir.</small>
             <div class="categories-list">
                 <?php
+                if($categoriesQuery->num_rows === 0){
+                    echo 'Henüz kategori eklenmemiş!';
+                }
+
                 while($row = $categoriesQuery->fetch_assoc())
                 {
                     echo '
@@ -46,8 +50,7 @@ $allCategoryCount=$categoriesQueryCount->fetch_assoc();
                     <h3>Hakkımda</h3>
                 </div>
                 <div class="menu-item-content">
-                <div class="about-me-container">
-                        <div class="about-me-pp" style="background-image: url('https://playtusu.com/wp-content/uploads/2021/11/avatar-the-last-airbender.jpg');"></div>
+                    <div class="about-me-container">
                         <?php
 
                             $adminQuery = $connection->query("SELECT * FROM user WHERE RoleID=1");
@@ -55,6 +58,11 @@ $allCategoryCount=$categoriesQueryCount->fetch_assoc();
 
                             $adminInfoQuery = $connection->query("SELECT * FROM admininfo WHERE user_id = ".$adminRow['id']." ");
                             $adminInfoRow = $adminInfoQuery->fetch_assoc();
+
+                        
+                            $imread = "../assets/user/images/".$adminRow["image"];
+
+                            echo '<img class="about-me-pp" src="'.$imread.'" alt="" srcset="">';
 
                             echo '
                             <h3>'.$adminRow['Name']." ".$adminRow['Surname'].'</h3>
@@ -75,7 +83,7 @@ $allCategoryCount=$categoriesQueryCount->fetch_assoc();
                     <h3>Kategoriler</h3>
                 </div>
                 <div class="menu-item-content">
-                    <?php
+                <?php
                         $categoriesQuery = $connection->query("SELECT * FROM categories");
 
                         while($categorieRow = $categoriesQuery->fetch_assoc()){

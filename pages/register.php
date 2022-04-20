@@ -43,7 +43,7 @@ include('../scripts/connection.php');
                 <label for="userMail" class="inputLabel">E-Posta</label>
                 <input type="text" name="userMail" id="userMail">
                 <label for="userPassword" class="inputLabel">Parola</label>
-                <input type="userPassword" name="userPassword" id="userPassword">
+                <input type="password" name="userPassword" id="userPassword">
                 <label for="dateOfBirth" class="inputLabel">Doğum Tarihi</label>
                 <input type="text" name="dateOfBirth" id="dateOfBirth">
                 <input type="button" value="KAYIT OL" onclick="SubmitFormData()">
