@@ -13,7 +13,6 @@ $post_query = $connection->query("SELECT * FROM post");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles/normalize.css">
-    <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/panel.css">
     <link rel="stylesheet" href="../styles/postList.css">
     <script src="https://kit.fontawesome.com/b6283481d8.js" crossorigin="anonymous"></script>
@@ -31,7 +30,10 @@ $post_query = $connection->query("SELECT * FROM post");
 <body>
     <?php include("../components/sideBar.php") ?>    
     <div class="content">
-        <h3>Yazı Listesi.</h3>
+        <div class="contentHead">
+            <h3>Yazı Listesi.</h3>
+            <button onclick="location.href = 'postAdd.php'">Yazı Ekle</button>
+        </div>
         <table>
             <tr>
                 <th>ID</th>
@@ -74,7 +76,7 @@ $post_query = $connection->query("SELECT * FROM post");
                             </td>
                             <td>
                                 <div class="iconGroup">
-                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    <i class="fa-solid fa-pen-to-square" onclick="location.href = \'postEdit.php?postId='.$post['id'].'\'"></i>
                                     <i class="fa-solid fa-trash" onclick="deletePost('.$post['id'].')"></i>
                                 </div>
                             </td>

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles/normalize.css">
-    <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/panel.css">
     <link rel="stylesheet" href="../styles/panelHome.css">
     <script src="https://kit.fontawesome.com/b6283481d8.js" crossorigin="anonymous"></script>
@@ -14,6 +13,17 @@
 <body>
     <?php include("../components/sideBar.php") ?>    
     <div class="content">
+    <a href="">
+            <div class="card">
+                <div class="iconContainer">
+                    <i class="fa-solid fa-home"></i>
+                </div>
+                <div class="labelGroup">
+                    <label for="" class="cardName">Ana Sayfa</label>
+                    <label for="" class="cardDescription">Panelin ana sayfasını görüntüleyin.</label>
+                </div>
+            </div>
+        </a>
         <a href="">
             <div class="card">
                 <div class="iconContainer">

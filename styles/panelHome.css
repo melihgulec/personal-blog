@@ -1,3 +1,9 @@
+.content
+{
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
 .card{
     display: flex;
     flex-direction: column;

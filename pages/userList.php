@@ -13,7 +13,6 @@ $users_query = $connection->query("SELECT * FROM user");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles/normalize.css">
-    <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/panel.css">
     <link rel="stylesheet" href="../styles/userList.css">
     <script src="https://kit.fontawesome.com/b6283481d8.js" crossorigin="anonymous"></script>

@@ -1,8 +1,6 @@
 <?php 
-
 include('../scripts/connection.php');
 $categories_query = $connection->query("SELECT * FROM categories");
-
 ?>
 
 <!DOCTYPE html>
@@ -13,15 +11,14 @@ $categories_query = $connection->query("SELECT * FROM categories");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles/normalize.css">
-    <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/panel.css">
     <link rel="stylesheet" href="../styles/categoriesList.css">
     <script src="https://kit.fontawesome.com/b6283481d8.js" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        function deleteCategorie(categorieId) {
-            $.post("../scripts/panelCategorieDelete.php", {categorieId: categorieId},
+        function deleteCategory(categoryId) {
+            $.post("../scripts/panelCategoryActions.php", {categoryId: categoryId, actionId: 2},
                 function(data) {
                     $('#results').html(data);
             });
@@ -31,23 +28,37 @@ $categories_query = $connection->query("SELECT * FROM categories");
 <body>
     <?php include("../components/sideBar.php") ?>    
     <div class="content">
-        <h3>Kategori Listesi.</h3>
-        <?php 
-            while($categorie = $categories_query->fetch_assoc()){
-                echo '
-                <div class="categoriesContainer">
-                    <div class="categorieInfo">
-                        <label for="" class="title">'.$categorie['Name'].'</label>
-                        <label for="" class="description">'.$categorie['id'].'</label>
-                    </div>
-                    <div class="iconGroup">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                        <i class="fa-solid fa-trash" onclick="deleteCategorie('.$categorie['id'].')"></i>
-                    </div>
-                </div>
-                ';
-            }
-        ?>
+        <div class="contentHead">
+            <h3>Kategori Listesi.</h3>
+            <button onclick="location.href = 'categoryAdd.php'">Kategori Ekle</button>
+        </div>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Kategori Adı</th>
+                <th>İşlem</th>
+            </tr>
+            <?php 
+                while($category = $categories_query->fetch_assoc()){
+                    echo '
+                        <tr>
+                            <td>
+                                '.$category['id'].'
+                            </td>
+                            <td width="90%">
+                                '.$category['Name'].'
+                            </td>
+                            <td>
+                                <div class="iconGroup">
+                                    <i class="fa-solid fa-pen-to-square" onclick="location.href = \'categoryEdit.php?categoryId='.$category['id'].'\'"></i>
+                                    <i class="fa-solid fa-trash" onclick="deleteCategory('.$category['id'].')"></i>
+                                </div>
+                            </td>
+                        </tr>
+                    ';
+                }
+            ?>
+        </table>
     </div>
     <div id="results"></div>
 </body>
