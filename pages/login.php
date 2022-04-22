@@ -1,6 +1,15 @@
 <?php
 include("../components/header.php");
 include('../scripts/connection.php');
+include('../scripts/routing.php');
+
+if(isset($_SESSION['loggedIn'])){
+    if($_SESSION['loggedIn'] === true){
+        go("../pages/index.php");
+    }
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +31,18 @@ include('../scripts/connection.php');
             var password = $("#password").val();
             $.post("../scripts/loginCheck.php", { email: email, password: password},
                 function(data) {
-                    $('#results').html(data);
+                    let result = JSON.parse(data);
+
+                    if(result.status === true){
+                        $('#results').html(result.data);
+                        
+                        const timeOut = setTimeout(() => {
+                            location.href = "../pages/index.php";
+                        }, 3000);
+
+                    }else{
+                        $('#results').html(result.data);
+                    }
             });
         }
     </script>
