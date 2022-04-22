@@ -3,6 +3,25 @@ include("../components/header.php");
 include '../scripts/connection.php';
 $postId = $_GET['post_id'];
 $post_query = $connection->query("SELECT * FROM post WHERE id = ".$postId." ");
+
+$isLogged = false;
+
+if(isset($_SESSION['loggedIn'])) 
+{ 
+    if($_SESSION['loggedIn'] === true)
+    {
+        $isLogged = true; 
+    } 
+    else 
+    {
+        $isLogged = false; 
+    } 
+}
+else
+{ 
+    $isLogged = false;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -18,19 +37,25 @@ $post_query = $connection->query("SELECT * FROM post WHERE id = ".$postId." ");
     <script src="https://kit.fontawesome.com/b6283481d8.js" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        function SubmitFormData() {
-            var commentVal = $("#comment").val();
-            var userId = 1; // SESSION DAN GELECEK
-            var postId = <?php echo $postId ?>;
-            const d = new Date();
-            var date = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDay();
-            $.post("../scripts/addPostComment.php", { commentVal: commentVal, userId: userId, postId: postId, date: date},
-                function(data) {
-                    $('#results').html(data);
-            });
-        }
-    </script>
+    <?php
+    if($isLogged === true){
+        echo '
+        <script>
+            function SubmitFormData() {
+                var commentVal = $("#comment").val();
+                var userId = '.$_SESSION['userId'].';
+                var postId = '.$postId.';
+                const d = new Date();
+                var date = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDay();
+                $.post("../scripts/addPostComment.php", { commentVal: commentVal, userId: userId, postId: postId, date: date},
+                    function(data) {
+                        $("#results").html(data);
+                });
+            }
+        </script>
+        ';
+    }
+    ?>
 </head>
 <body>
     <?php includeHeader($pageIndexes['categoriesPage']) ?>
@@ -87,11 +112,11 @@ $post_query = $connection->query("SELECT * FROM post WHERE id = ".$postId." ");
                             <i class="fa-solid fa-user"></i>
                         </div>
                         <div class="comment-input-container">
-                            <textarea name="comment" id="comment" placeholder="Enter your comment."></textarea>
+                            <textarea name="comment" id="comment" <?php echo $isLogged === true ? 'placeholder="Yorum yaz."' : 'placeholder="Yorum yapabilmek için giriş yapmalısın." readonly' ?> ></textarea>
                         </div>
                     </div>
                     <div class="send-btn-container">
-                        <input type="button" value="Gönder" class="send-comment-btn" onclick="SubmitFormData()">
+                        <input type="button" value="Gönder" class="send-comment-btn" <?php echo $isLogged === true ? 'onclick="SubmitFormData()"' : 'disabled' ?>>
                     </div>
                 </form>
                 <h3>Tüm yorumlar</h3>

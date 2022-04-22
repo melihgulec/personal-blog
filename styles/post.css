@@ -172,6 +172,12 @@
     cursor: pointer;
 }
 
+.send-comment-btn[disabled=disabled], .send-comment-btn:disabled {
+    background-color: #e2e2e2;
+    color: #c0c0c0;
+    cursor: not-allowed;
+}
+
 .user-comment-container{
     width: 100%;
     display: flex;
