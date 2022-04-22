@@ -18,7 +18,7 @@ $user = $getUserData->fetch_assoc();
     <title>Document</title>
     <link rel="stylesheet" href="../styles/normalize.css">
     <link rel="stylesheet" href="../styles/panel.css">
-    <link rel="stylesheet" href="../styles/categoryEdit.css">
+    <link rel="stylesheet" href="../styles/userEdit.css">
     <script src="https://kit.fontawesome.com/b6283481d8.js" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -29,7 +29,7 @@ $user = $getUserData->fetch_assoc();
             var dateOfBirth = document.getElementById("dateOfBirth").value;
             var email = document.getElementById("email").value;
             var password = document.getElementById("password").value;
-            var roleid = document.getElementById("roleid").value;
+            var roleid = document.getElementById("roleId").value;
             var photoPath = document.getElementById("photoPath").value;
 
             $.post("../scripts/panelUserActions.php", {
@@ -65,8 +65,23 @@ $user = $getUserData->fetch_assoc();
         <input type="text" name="email" id="email" value="<?php echo $user['Email']; ?>">
         <label for="userpass" class="inputLabel">Kullanıcı Parolası</label>
         <input type="password" name="password" id="password" value="<?php echo $user['Password']; ?>">
-        <label for="roleid" class="inputLabel">Kullanıcı Rol ID</label>
-        <input type="text" name="roleid" id="roleid" value="<?php echo $user['RoleID']; ?>">
+        <label for="roleId" class="inputLabel">Rolü</label>
+        <select name="roleId" id="roleId">
+            <?php 
+                $rolesFetchQuery = $connection->query("SELECT * FROM role");
+
+                while($row = $rolesFetchQuery->fetch_assoc()){
+
+                    $selectExpression = $row['id'] === $user['RoleID'] ? 'selected' : '';
+
+                    echo '
+                        <option value="'.$row['id'].'" '.$selectExpression.'>
+                            '.$row['Name'].'
+                        </option>
+                    ';
+                }
+            ?>
+        </select>
         <label for="photoPath" class="inputLabel">Kullanıcı Fotoğrafı</label>
         <input type="text" name="photoPath" id="photoPath" value="<?php echo $user['image']; ?>">
         <button class="editButton" onclick="editUser()">Düzenle</button>

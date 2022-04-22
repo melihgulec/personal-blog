@@ -1,3 +1,7 @@
+<?php 
+include("../scripts/connection.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +22,7 @@
             var dateOfBirth = document.getElementById("dateOfBirth").value;
             var email = document.getElementById("email").value;
             var password = document.getElementById("password").value;
-            var roleid = document.getElementById("roleid").value;
+            var roleid = document.getElementById("roleId").value;
             var photoPath = document.getElementById("photoPath").value;
 
             $.post("../scripts/panelUserActions.php", {
@@ -51,8 +55,20 @@
         <input type="text" name="email" id="email">
         <label for="userpass" class="inputLabel">Kullanıcı Parolası</label>
         <input type="password" name="password" id="password">
-        <label for="roleid" class="inputLabel">Kullanıcı Rol ID</label>
-        <input type="text" name="roleid" id="roleid">
+        <label for="roleId" class="inputLabel">Rol</label>
+        <select name="roleId" id="roleId">
+            <?php 
+                $rolesFetchQuery = $connection->query("SELECT * FROM role");
+
+                while($row = $rolesFetchQuery->fetch_assoc()){
+                    echo '
+                        <option value="'.$row['id'].'">
+                            '.$row['Name'].'
+                        </option>
+                    ';
+                }
+            ?>
+        </select>
         <label for="photoPath" class="inputLabel">Kullanıcı Fotoğrafı</label>
         <input type="text" name="photoPath" id="photoPath">
         <button class="editButton" onclick="addUser()">Ekle</button>

@@ -37,13 +37,17 @@ $users_query = $connection->query("SELECT * FROM user");
         <?php 
             while($user = $users_query->fetch_assoc()){
                 $fullName = $user['Name']." ".$user['Surname'];
+
+                $roleQuery = $connection->query("SELECT * FROM role WHERE id ='".$user['RoleID']."'");
+                $roleData = $roleQuery->fetch_assoc();
+
                 echo '
                 <div class="userContainer">
                     <div class="baseContainer">
                         <img src="../assets/user/images/'.$user['image'].'" alt="" srcset="">
                         <div class="userInfo">
                         <label for="" class="title">'.$fullName.'</label>
-                        <label for="" class="description">'.$user['Email'].'</label>
+                        <label for="" class="description">'.$roleData['Name'].', '.$user['Email'].'</label>
                         </div>
                     </div>
                     <div class="iconGroup">
