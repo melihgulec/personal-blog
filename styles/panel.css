@@ -18,8 +18,9 @@ aside {
   max-width: 450px;
   height: 100%;
   background-color: #fff;
-  padding: 25px 0 0 12px;
+  padding: 8px 0 0 12px;
   border-right: 1px solid #eee;
+  transition: 100ms ease-in-out;
 }
 
 .headItem{
@@ -92,4 +93,36 @@ aside h2 {
 
 .contentHead button:hover{
   cursor: pointer;
+}
+
+.barMenu{
+  display: none;
+  width: 5%;
+  padding-top: 28px;
+  padding-left: 25px;
+  height: 35px;
+  z-index: 1;
+}
+
+.barMenu i{
+  font-size: 25px;
+}
+
+.barMenu i:hover{
+  cursor: pointer;
+}
+
+.showBarMenu{
+  display: block !important;
+  z-index: 0;
+}
+
+@media only screen and (max-width: 1150px) {
+   aside{
+     display: none;
+  }
+
+  .barMenu{
+    display: block;
+  }
 }

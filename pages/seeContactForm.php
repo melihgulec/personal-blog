@@ -24,7 +24,7 @@ $contact = $getContactData->fetch_assoc();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-    <?php include("../components/sideBar.php") ?>    
+    <?php include("../components/sideBar.php") ?>
     <div class="content">
         <h3>Mesaja Gözat.</h3>
         <label for="contactId" class="inputLabel">Contact ID</label>

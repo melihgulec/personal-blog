@@ -9,12 +9,9 @@ include("../scripts/connection.php");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../styles/normalize.css">
-    <link rel="stylesheet" href="../styles/panel.css">
+    <?php include("panelBaseStyles.php") ?>
     <link rel="stylesheet" href="../styles/postEdit.css">
-    <script src="https://kit.fontawesome.com/b6283481d8.js" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         function addUser() {
             var userName = document.getElementById("userName").value;
