@@ -19,6 +19,10 @@ echo '
           <a class="current" href="../pages/panel.php">Ana Sayfa</a>
         </div>
         <div class="itemGroup">
+          <i class="fa-solid fa-message"></i>
+          <a class="current" href="../pages/contactForms.php">Mesajlar</a>
+        </div>
+        <div class="itemGroup">
           <i class="fa-solid fa-pen"></i>
           <a href="../pages/postList.php">Yazı Listesi</a>
         </div>

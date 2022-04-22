@@ -1,0 +1,46 @@
+.content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-top: 15px;
+}
+
+.content h3{
+    margin-bottom: 25px;
+}
+
+.iconGroup{
+    font-size: 25px;
+}
+
+
+.iconGroup i:first-child{
+    color: #36d889;
+    padding: 10px;
+}
+
+.iconGroup i:nth-child(2n){
+    color: red;
+}
+
+.iconGroup i:nth-child(2n):hover, i:nth-child(2n+1):hover{
+    cursor: pointer;
+}
+
+td{
+    padding-left: 12px;
+}
+
+table, th, td{
+    border: 1px solid #e2e2e2;
+    border-collapse: collapse;
+}
+
+table th{
+    height: 45px;
+}
+
+table tr:nth-child(2n){
+    background-color: #f5f4f4;
+}
