@@ -63,8 +63,23 @@ $post = $getPostData->fetch_assoc();
         <input type="text" name="postPhotoPath" id="postPhotoPath" value="<?php echo $post['image']; ?>">
         <label for="postUserId" class="inputLabel">Kullanıcı ID</label>
         <input type="text" name="postUserId" id="postUserId" value="<?php echo $post['user_id']; ?>">
-        <label for="postCategoryId" class="inputLabel">Kategori ID</label>
-        <input type="text" name="postCategoryId" id="postCategoryId" value="<?php echo $post['categorie_id']; ?>">
+        <label for="postCategoryId" class="inputLabel">Kategori</label>
+        <select name="postCategoryId" id="postCategoryId">
+            <?php 
+                $categoriesFetchQuery = $connection->query("SELECT * FROM categories");
+
+                while($row = $categoriesFetchQuery->fetch_assoc()){
+
+                    $selectExpression = $row['id'] === $post['categorie_id'] ? 'selected' : '';
+
+                    echo '
+                        <option value="'.$row['id'].'" '.$selectExpression.'>
+                            '.$row['Name'].'
+                        </option>
+                    ';
+                }
+            ?>
+        </select>
         <label for="postDescription" class="inputLabel">İçerik</label>
         <textarea name="postDescription" id="postDescription"><?php echo $post['Description']; ?></textarea>
         <button class="editButton" onclick="editPost()">Düzenle</button>
