@@ -35,11 +35,15 @@ echo '
         <label class="headLabel">Ekle</label>
         <div class="itemGroup">
           <i class="fa-solid fa-plus"></i>
+          <a href="../pages/userAdd.php">Kullanıcı Ekle</a>
+        </div>
+        <div class="itemGroup">
+          <i class="fa-solid fa-plus"></i>
           <a href="../pages/postAdd.php">Yazı Ekle</a>
         </div>
         <div class="itemGroup">
           <i class="fa-solid fa-plus"></i>
-          <a href="../pages/categoryAdd.php">Kategori ekle</a>
+          <a href="../pages/categoryAdd.php">Kategori Ekle</a>
         </div>
         <div class="itemGroup">
           <i class="fa-solid fa-plus"></i>
@@ -47,7 +51,7 @@ echo '
         </div>
         <div class="itemGroup">
           <i class="fa-solid fa-gear"></i>
-          <a href="../pages/settings.php">Ayarlar</a>
+          <a href="../pages/panelSettings.php">Ayarlar</a>
         </div>
       </div>
     </aside>
