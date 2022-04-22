@@ -20,7 +20,7 @@ $post_query = $connection->query("SELECT * FROM post");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         function deletePost(postId) {
-            $.post("../scripts/panelPostDelete.php", {postId: postId},
+            $.post("../scripts/panelPostActions.php", {postId: postId, actionId: 2},
                 function(data) {
                     $('#results').html(data);
             });

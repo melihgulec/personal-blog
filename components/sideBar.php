@@ -30,6 +30,10 @@ echo '
           <i class="fa-solid fa-book"></i>
           <a href="../pages/categoriesList.php">Kategoriler</a>
         </div>
+        <div class="itemGroup">
+          <i class="fa-solid fa-id-card"></i>
+          <a href="../pages/rolesList.php">Roller</a>
+        </div>
       </div>
       <div class="headItem">
         <label class="headLabel">Ekle</label>
@@ -47,7 +51,7 @@ echo '
         </div>
         <div class="itemGroup">
           <i class="fa-solid fa-plus"></i>
-          <a href="../pages/roleAdd.php">Roller</a>
+          <a href="../pages/roleAdd.php">Rol Ekle</a>
         </div>
         <div class="itemGroup">
           <i class="fa-solid fa-gear"></i>

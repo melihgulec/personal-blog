@@ -1,3 +1,7 @@
+<?php
+include("../scripts/connection.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +20,7 @@
             var postTitle = document.getElementById("postTitle").value;
             var postDate = document.getElementById("postDate").value;
             var postPhotoPath = document.getElementById("postPhotoPath").value;
-            var postUserId = document.getElementById("postUserId").value;
+            var postUserId = document.getElementById("postUserId").value; // SESSION'DAN GİREN KULLANICININ ID'Sİ VERİLECEK.
             var postCategoryId = document.getElementById("postCategoryId").value;
             var postDescription = document.getElementById("postDescription").value;
 
@@ -49,8 +53,20 @@
         <input type="text" name="postPhotoPath" id="postPhotoPath">
         <label for="postUserId" class="inputLabel">Kullanıcı ID</label>
         <input type="text" name="postUserId" id="postUserId">
-        <label for="postCategoryId" class="inputLabel">Kategori ID</label>
-        <input type="text" name="postCategoryId" id="postCategoryId">
+        <label for="postCategoryId" class="inputLabel">Kategori</label>
+        <select name="postCategoryId" id="postCategoryId">
+            <?php 
+                $categoryFetchQuery = $connection->query("SELECT * FROM categories");
+
+                while($row = $categoryFetchQuery->fetch_assoc()){
+                    echo '
+                        <option value="'.$row['id'].'">
+                            '.$row['Name'].'
+                        </option>
+                    ';
+                }
+            ?>
+        </select>
         <label for="postDescription" class="inputLabel">İçerik</label>
         <textarea name="postDescription" id="postDescription"></textarea>
         <button class="editButton" onclick="addPost()">Ekle</button>
