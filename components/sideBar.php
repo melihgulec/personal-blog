@@ -1,5 +1,4 @@
 <?php
-
 $sideBarPageIndexes = array(
   'home'       => 0,
   'addPost'    => 1,
@@ -66,6 +65,7 @@ echo '
             <a href="../pages/panelSettings.php">Ayarlar</a>
           </div>
         </div>
+        <button class="logoutButton" onclick="location.href = \'../scripts/exit.php?fromPanel=1\'">Çıkış</button>
       </aside>
     </div>
 ';

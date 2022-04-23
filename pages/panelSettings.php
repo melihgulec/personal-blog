@@ -1,7 +1,8 @@
 <?php 
+session_start();
+include("../scripts/panelAdminCheck.php");
 
 include('../scripts/connection.php');
-
 $socialMediaQuery = $connection->query("SELECT * FROM socialmedia");
 
 ?>
@@ -13,7 +14,7 @@ $socialMediaQuery = $connection->query("SELECT * FROM socialmedia");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <?php include("panelBaseStyles.php") ?>
+    <?php include("../scripts/panelBaseStyles.php") ?>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="../styles/panelSettings.css">
     <script>

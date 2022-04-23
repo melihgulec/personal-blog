@@ -1,4 +1,6 @@
 <?php 
+session_start();
+include("../scripts/panelAdminCheck.php");
 
 include('../scripts/connection.php');
 

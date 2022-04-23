@@ -117,6 +117,25 @@ aside h2 {
   z-index: 0;
 }
 
+.aboutUser{
+  font-weight: bold;
+}
+
+.logoutButton{
+  margin-top: 55px;
+  width: 95%;
+  height: 40px;
+  border:0;
+  background-color: #36d889;
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+.logoutButton:hover{
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 1150px) {
    aside{
      display: none;
