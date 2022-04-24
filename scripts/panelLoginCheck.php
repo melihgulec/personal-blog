@@ -52,6 +52,7 @@
         $_SESSION['userEmail'] = $userDetails['Email'];
         $_SESSION['userName'] = $userDetails['Name'];
         $_SESSION['userSurname'] = $userDetails['Surname'];
+        $_SESSION['userImage'] = $userDetails['image'];
         $_SESSION['isAdmin'] = true;
         
         $arr = array(

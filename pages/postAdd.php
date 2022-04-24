@@ -16,6 +16,11 @@ include("../scripts/connection.php");
     <link rel="stylesheet" href="../styles/postEdit.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        $(document).ready(()=>{
+            let d = new Date();
+            $("#postDate").val(d.getFullYear() + "-" + d.getMonth() + "-" + d.getDay());
+        });
+
         function addPost() {
             var postTitle = document.getElementById("postTitle").value;
             var postDate = document.getElementById("postDate").value;
@@ -23,8 +28,6 @@ include("../scripts/connection.php");
             var postUserId = document.getElementById("postUserId").value; // SESSION'DAN GİREN KULLANICININ ID'Sİ VERİLECEK.
             var postCategoryId = document.getElementById("postCategoryId").value;
             var postDescription = document.getElementById("postDescription").value;
-
-            console.log(postDescription);
 
             $.post("../scripts/panelPostActions.php", {
                 postTitle: postTitle, 

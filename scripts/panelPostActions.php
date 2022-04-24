@@ -22,12 +22,12 @@ if ($getActionId == 0)
     $postDescription = $_POST["postDescription"];
 
     $sqlStr = "INSERT INTO post(Title, Description, Date, image, user_id, categorie_id) VALUES(
-        '".$postTitle."', 
-        '".$postDescription."',
-        '".$postDate."',
-        '".$postPhotoPath."',
-        '".$postUserId."',
-        '".$postCategoryId."'
+        '".$connection->real_escape_string($postTitle)."', 
+        '".$connection->real_escape_string($postDescription)."',
+        '".$connection->real_escape_string($postDate)."',
+        '".$connection->real_escape_string($postPhotoPath)."',
+        '".$connection->real_escape_string($postUserId)."',
+        '".$connection->real_escape_string($postCategoryId)."'
         )";
 }
 else if ($getActionId == 1)
@@ -41,13 +41,13 @@ else if ($getActionId == 1)
     $postDescription = $_POST["postDescription"];
 
     $sqlStr = "UPDATE post SET 
-    Title = '".$postTitle."',
-    Description = '".$postDescription."',
-    Date = '".$postDate."',
-    image = '".$postPhotoPath."',
-    user_id = '".$postUserId."',
-    categorie_id = '".$postCategoryId."' 
-    WHERE id = ".$postId;
+    Title = '".$connection->real_escape_string($postTitle)."',
+    Description = '".$connection->real_escape_string($postDescription)."',
+    Date = '".$connection->real_escape_string($postDate)."',
+    image = '".$connection->real_escape_string($postPhotoPath)."',
+    user_id = '".$connection->real_escape_string($postUserId)."',
+    categorie_id = '".$connection->real_escape_string($postCategoryId)."' 
+    WHERE id = ".$connection->real_escape_string($postId);
 }
 else if ($getActionId == 2){
     $postId = $_POST["postId"];

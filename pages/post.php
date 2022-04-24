@@ -93,7 +93,7 @@ else
                         <div class="post-content-info">
                             <h2>'.$row['Title'].'</h2>
                             <p>
-                                '.$row['Description'].'
+                                '.nl2br($row['Description']).'
                             </p>
                         </div>
                         <div class="post-share-container" onclick="navigator.clipboard.writeText(window.location)">
@@ -109,7 +109,7 @@ else
                 <form action="../scripts/addPostComment.php" method="post">
                     <div class="comment-section">
                         <div class="user-pp">
-                            <i class="fa-solid fa-user"></i>
+                            <?php echo $isLogged === true ? '<img src="../assets/user/images/'.$_SESSION['userImage'].'" alt="" srcset="">' : '<i class="fa-solid fa-user"></i>' ?>
                         </div>
                         <div class="comment-input-container">
                             <textarea name="comment" id="comment" <?php echo $isLogged === true ? 'placeholder="Yorum yaz."' : 'placeholder="Yorum yapabilmek için giriş yapmalısın." readonly' ?> ></textarea>
@@ -137,7 +137,7 @@ else
                             echo '
                             <div class="user-comment-container">
                                 <div class="user-comment-pp">
-                                    <i class="fa-solid fa-user"></i>
+                                    <img src="../assets/user/images/'.$user['image'].'" alt="" srcset="">
                                 </div>
                                 <div class="user-comment-details">
                                     <div class="user-info">

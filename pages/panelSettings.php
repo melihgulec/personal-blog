@@ -29,6 +29,18 @@ $socialMediaQuery = $connection->query("SELECT * FROM socialmedia");
                     $('#results').html(data);
             });
         }
+
+        function editInfo(infoId, description) {
+            var description = document.getElementById("aboutme").value;
+            $.post("../scripts/panelSettingsActions.php", {
+                infoId: infoId, 
+                description: description, 
+                actionId: 3,}
+                ,
+                function(data) {
+                    $('#results').html(data);
+            });
+        }
     </script>
 </head>
 <body>
@@ -38,6 +50,14 @@ $socialMediaQuery = $connection->query("SELECT * FROM socialmedia");
             <h3>Ayarlar</h3>
         </div>
         <?php
+            $adminInfoQuery = $connection->query("SELECT * FROM admininfo");
+            $data = $adminInfoQuery->fetch_assoc();
+            echo '
+                <label class="inputLabel">Hakkımda Yazısı</label>
+                <input type="text" name="aboutme" id="aboutme" value ="'.$data['Description'].'">
+                <button class="editButton" onclick="editInfo(\''.$data['id'].'\')">Düzenle</button>
+            ';
+
             while($socialMedia = $socialMediaQuery->fetch_assoc()){
                 echo '
                     <label class="inputLabel">'.$socialMedia['Name'].' Link</label>

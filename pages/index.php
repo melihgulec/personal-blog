@@ -34,7 +34,7 @@ $post_query = $connection->query("SELECT * FROM post");
                     $categorieRow = $categorie_query->fetch_assoc();
 
                     $description = $row['Description'];
-                    $description = (strlen($description) > 180) ? substr($description,0,180).'...' : $description;
+                    $description = (strlen($description) > 500) ? substr($description,0,500).'...' : $description;
 
                     echo '
                     <div class="post-container">

@@ -25,8 +25,13 @@ else if ($getActionId == 1)
     Link = '".$socialMediaLink."'
     WHERE id = ".$socialMediaId;
 }
-else if ($getActionId == 2){
-    // Sil
+else if ($getActionId == 3){
+    $infoId = $_POST['infoId'];
+    $description = $_POST['description'];
+
+    $sqlStr = "UPDATE adminInfo SET 
+    Description = '".$description."'
+    WHERE id = ".$infoId;
 }
 
 

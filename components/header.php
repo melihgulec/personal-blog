@@ -6,6 +6,7 @@ $pageIndexes = array(
     'categoriesPage' => 1,
     'contactPage'    => 2,
     'loginPage'      => 3,
+    'registerPage'   => 4,
 );
 
 function includeHeader($pageIndex){
