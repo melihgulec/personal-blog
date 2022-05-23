@@ -10,7 +10,7 @@ include("../scripts/panelAdminCheck.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kategori Ekle</title>
     <?php include("../scripts/panelBaseStyles.php") ?>
     <link rel="stylesheet" href="../styles/categoryEdit.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -18,10 +18,19 @@ include("../scripts/panelAdminCheck.php");
         function addCategory() {
             var categoryName = document.getElementById("categoryName").value;
 
-            $.post("../scripts/panelCategoryActions.php", {categoryName: categoryName, actionId: 0},
+            if(categoryName === ""){
+                Swal.fire({
+                                heightAuto: false,
+                                title: "Başarısız.",
+                                text: "Tüm alanlar doldurulmalıdır.",
+                                icon: "error"
+                });
+            }else{
+                $.post("../scripts/panelCategoryActions.php", {categoryName: categoryName, actionId: 0},
                 function(data) {
                     $('#results').html(data);
             });
+            }
         }
     </script>
 </head>

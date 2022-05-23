@@ -13,7 +13,7 @@ $socialMediaQuery = $connection->query("SELECT * FROM socialmedia");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ayarlar</title>
     <?php include("../scripts/panelBaseStyles.php") ?>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="../styles/panelSettings.css">

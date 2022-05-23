@@ -243,3 +243,20 @@
 .user-comments .user-comment-container:not(:first-child){
     margin-top: 55px;
 }
+
+.likeContainer{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex-direction: column;
+    font-size: 20px;
+}
+
+.likes .likeCount{
+    margin-right: 25px;
+}
+
+.likes i:hover{
+    cursor: pointer;
+}

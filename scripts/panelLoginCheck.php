@@ -1,49 +1,25 @@
 <?php
-    $postEmail = $_POST["email"];
-    $postPassword = $_POST["password"];
-    
     include("../scripts/connection.php");
     include("../scripts/routing.php");
 
-    if(empty($postEmail) && empty($postPassword)){
+    $postEmail = $_POST["email"];
+    $postPassword = $_POST["password"];
+    
+    $goPath = "../pages/panelLogin.php?";
 
-        $arr = array(
-            'status' => false,
-            'data'   => '<script>
-                            Swal.fire({
-                                heightAuto: false,
-                                title: "Hata!",
-                                text: "Formdaki tüm alanlar doldurulmalıdır.",
-                                icon: "error"
-                            });
-                        </script>'
-        );
-        
-        echo json_encode($arr);
+    if(empty($postEmail) && empty($postPassword)){
+        go($goPath."success=2");
+        exit();
     }
 
     $adminRoleQuery = $connection->query("SELECT id FROM role WHERE Name='Yönetici'");
     $adminRoleId = $adminRoleQuery->fetch_assoc();
 
-    $userQuery = $connection->query("SELECT * FROM user WHERE Email = '".$postEmail."' AND password = '".$postPassword."' AND RoleID = '".$adminRoleId['id']."'");
+    $userQuery = $connection->query("SELECT * FROM user WHERE Email = '".$postEmail."' AND RoleID = '".$adminRoleId['id']."'");
     $row = $userQuery->num_rows;
     $userDetails = $userQuery->fetch_assoc();
 
-    if($row == 0){
-        $arr = array(
-            'status' => false,
-            'data'   => '<script>
-                            Swal.fire({
-                                heightAuto: false,
-                                title: "Giriş başarısız.",
-                                text: "Kullanıcı bulunamadı.",
-                                icon: "error"
-                            });
-                        </script>'
-        );
-        
-        echo json_encode($arr);
-    }else{
+    if($row != 0 && password_verify($postPassword, $userDetails["Password"])){
         session_start();
         session_regenerate_id(true);
 
@@ -55,18 +31,8 @@
         $_SESSION['userImage'] = $userDetails['image'];
         $_SESSION['isAdmin'] = true;
         
-        $arr = array(
-            'status' => true,
-            'data'   => '<script>
-                            Swal.fire({
-                                heightAuto: false,
-                                title: "Giriş başarılı.",
-                                text: "Hoş geldin '.$userDetails['Name'].'. Sayfaya yönlendiriliyorsunuz.",
-                                icon: "success"
-                            });
-                        </script>'
-        );
-        
-        echo json_encode($arr);
+        go("../pages/panel.php");
+    }else{
+        go($goPath."success=0");
     }
 ?>

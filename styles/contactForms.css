@@ -12,12 +12,15 @@
 
 .iconGroup{
     font-size: 25px;
+    display: row;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 
 .iconGroup i:first-child{
     color: #36d889;
-    padding: 10px;
 }
 
 .iconGroup i:nth-child(2n){

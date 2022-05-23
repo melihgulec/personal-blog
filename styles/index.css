@@ -114,6 +114,30 @@
     letter-spacing: 3px;
 }
 
+.paginationContainer{
+    margin-top:25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paginationContainer input[type="button"]{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: transparent;
+    border: 1px solid #36d889;
+    margin-right: 20px;
+    cursor: pointer;
+    transition: 100ms ease-in-out;
+}
+
+.paginationContainer input[type="button"]:hover{
+    background-color: #36d889;
+    color: white;
+}
+
 @media only screen and (max-width: 1260px) {
     .posts{
         flex:2;

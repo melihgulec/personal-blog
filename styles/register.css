@@ -54,15 +54,19 @@ html, body{
     background-color: #e2e2e2;
 }
 
-.mainContainer form input[type="button"]:hover{
+.mainContainer form input[type="submit"]:hover{
     cursor: pointer;
     background-color: #29c077;
 }
 
-.mainContainer form input[type="button"]{
+.mainContainer form input[type="submit"]{
     margin-top: 35px;
     background-color: #36d889;
     color: white;
     font-weight: bold;
     height: 55px;
+}
+
+.mainContainer form input[type="file"]{
+    padding-top:25px;
 }

@@ -74,9 +74,12 @@ $allCategoryCount=$categoriesQueryCount->fetch_assoc();
                 </div>
             </div>
             <div class="menu-item-container">
-                <div class="search-container">
-                    <input type="text" name="search" id="search" placeholder="Enter Keywords..." />
-                </div>
+                <form action="../pages/search.php" method="GET">
+                    <div class="search-container">
+                        <input type="text" name="keyword" id="keyword" placeholder="Ara..." />
+                        <input type="submit" class="search-btn" value="ARA"/>
+                    </div>
+                </form>
             </div>
             <div class="menu-item-container">
                 <div class="menu-item-head">

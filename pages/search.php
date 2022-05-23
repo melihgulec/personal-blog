@@ -2,14 +2,8 @@
 include("../components/header.php");
 include('../scripts/connection.php');
 
-$postCountQuery = $connection->query("SELECT COUNT(*) as count FROM post");
-$countResult = $postCountQuery->fetch_assoc();
-
-$page_number = isset($_GET['page']) ? $_GET['page'] : 0 ;
-$count_per_page = 5;
-$next_offset = $page_number * $count_per_page;
-
-$post_query = $connection->query("SELECT * FROM post ORDER BY Date DESC LIMIT $count_per_page OFFSET $next_offset");
+$search = isset($_GET["keyword"]) ? $_GET["keyword"] : "----------------------";
+$post_query = $connection->query("SELECT * FROM post WHERE (Title LIKE '%$search%' OR Description LIKE '%$search%')");
 
 ?>
 
@@ -19,14 +13,14 @@ $post_query = $connection->query("SELECT * FROM post ORDER BY Date DESC LIMIT $c
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ana Sayfa</title>
+    <title>Arama Sonuçları</title>
     <link rel="stylesheet" href="../styles/normalize.css">
     <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/index.css">
     <script src="https://kit.fontawesome.com/b6283481d8.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <?php includeHeader($pageIndexes['indexPage']); ?>
+    <?php includeHeader(4); ?>
     <div class="content">
         <div class="posts">
             <?php 
@@ -67,7 +61,7 @@ $post_query = $connection->query("SELECT * FROM post ORDER BY Date DESC LIMIT $c
                         <button type="button" class="continue-read-btn" onclick="location.href=\'post.php?post_id='.$row['id'].'\'">OKUMAYA DEVAM ET</button>
                     </div>
                     <div class="post-share-container">
-                        <span class="share-text">Bağlantıyı kopyala</span>
+                        <span class="share-text">Paylaş</span>
                         <i class="fa-solid fa-ellipsis-vertical"></i>
                     </div>
                 </div>
@@ -75,17 +69,6 @@ $post_query = $connection->query("SELECT * FROM post ORDER BY Date DESC LIMIT $c
                 };
                 
             ?>
-            <div class="paginationContainer">
-                <?php 
-                    $pageCount = $countResult["count"];
-
-                    $realPages = ceil($pageCount / $count_per_page);
-
-                    for($i = 0; $i < $realPages ; $i++){
-                        echo '<input type="button" value="'.($i + 1).'" onclick="location.href=\'../pages/index.php?page='.($i).'\'"/>';
-                    }
-                ?>
-            </div>
         </div>
         <div class="right-side">
             <div class="menu-item-container">
@@ -119,7 +102,7 @@ $post_query = $connection->query("SELECT * FROM post ORDER BY Date DESC LIMIT $c
             <div class="menu-item-container">
                 <form action="../pages/search.php" method="GET">
                     <div class="search-container">
-                        <input type="text" name="keyword" id="keyword" placeholder="Ara..." />
+                        <input type="text" name="keyword" id="keyword" placeholder="Enter Keywords..." />
                         <input type="submit" class="search-btn" value="ARA"/>
                     </div>
                 </form>

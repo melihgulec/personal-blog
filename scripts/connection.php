@@ -18,7 +18,8 @@ if(!$connection){
 $db = $connection->select_db($database);
 
 if(!$db){
-    echo "Veri tabanı hatası.".mysqli_error();echo "<br>";
+    echo "Veri tabanı hatası.".mysqli_error($connection);
+    echo "<br>";
 }
 
 ?>

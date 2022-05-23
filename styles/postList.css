@@ -40,12 +40,15 @@
 
 .iconGroup{
     font-size: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 }
 
 
 .iconGroup i:first-child{
     color: #36d889;
-    padding: 10px;
 }
 
 .iconGroup i:nth-child(2n){
@@ -56,7 +59,7 @@
     cursor: pointer;
 }
 
-td{
+/*td{
     padding-left: 12px;
 }
 
@@ -71,4 +74,4 @@ table th{
 
 table tr:nth-child(2n){
     background-color: #f5f4f4;
-}
+}*/

@@ -22,6 +22,12 @@ else
     $isLogged = false;
 }
 
+$postLikeQuery = $connection->query("SELECT COUNT(*) as count FROM user_likes WHERE post_id = ".$postId." AND type = 1");
+$postLikeRow = $postLikeQuery->fetch_assoc();
+
+$postDislikeQuery = $connection->query("SELECT COUNT(*) as count FROM user_likes WHERE post_id = ".$postId." AND type = 0");
+$postDislikeRow = $postDislikeQuery->fetch_assoc();
+
 ?>
 
 <!DOCTYPE html>
@@ -38,24 +44,35 @@ else
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <?php
-    if($isLogged === true){
-        echo '
-        <script>
-            function SubmitFormData() {
-                var commentVal = $("#comment").val();
-                var userId = '.$_SESSION['userId'].';
-                var postId = '.$postId.';
-                const d = new Date();
-                var date = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDay();
-                $.post("../scripts/addPostComment.php", { commentVal: commentVal, userId: userId, postId: postId, date: date},
-                    function(data) {
-                        $("#results").html(data);
-                });
-            }
-        </script>
-        ';
-    }
+        if($isLogged === true){
+            echo '
+            <script>
+                function SubmitFormData() {
+                    var commentVal = $("#comment").val();
+                    var userId = '.$_SESSION['userId'].';
+                    var postId = '.$postId.';
+                    const d = new Date();
+                    var date = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDay();
+                    $.post("../scripts/addPostComment.php", { commentVal: commentVal, userId: userId, postId: postId, date: date},
+                        function(data) {
+                            $("#results").html(data);
+                    });
+                }
+            </script>
+            ';
+        }
     ?>
+    <script>
+        function SubmitLike(likeType) {
+            let userId = <?php echo $_SESSION['userId']; ?>;
+            let postId = <?php echo $postId; ?>;
+
+            $.post("../scripts/likePost.php", { postId: postId, userId: userId, likeType: likeType},
+                function(data) {
+                    $("#results").html(data);
+            });
+        }
+    </script>
 </head>
 <body>
     <?php includeHeader($pageIndexes['categoriesPage']) ?>
@@ -70,11 +87,61 @@ else
                         echo 'Gönderi bulunamadı.';
                         exit();
                     }else{
+                        $viewQuery = $connection->query("UPDATE post SET views = ".(++$row["views"])." WHERE id = $postId");
+
                         $user_query = $connection->query("SELECT * FROM user WHERE id = '".$row['user_id']."'");
                         $userRow = $user_query->fetch_assoc();
 
                         $categorie_query = $connection->query("SELECT * FROM categories WHERE id = '".$row['categorie_id']."'");
                         $categorieRow = $categorie_query->fetch_assoc();
+
+                        if($isLogged){
+                            $likeQuery = $connection->query("SELECT COUNT(*) as count FROM user_likes WHERE post_id = $postId AND type = 1 AND user_id =".$_SESSION["userId"]);
+                            $result = $likeQuery->fetch_assoc();
+                            $likeCount = $result["count"];
+                            $isLiked = $likeCount == 0 ? false: true;
+
+                            $dislikeQuery = $connection->query("SELECT COUNT(*) as count FROM user_likes WHERE post_id = $postId AND type = 0 AND user_id =".$_SESSION["userId"]);
+                            $result = $dislikeQuery->fetch_assoc();
+                            $dislikeCount = $result["count"];
+                            $isDisliked = $dislikeCount == 0 ? false: true;
+
+                            $like = $isLiked ? 'style="color: #36d889"' : ""; 
+                            $dislike = $isDisliked ? 'style="color: red"' : ""; 
+
+                            $likeOnclick = "";
+
+                            if($isLiked){
+                                $likeOnclick = 'onclick="SubmitLike(-1)"';
+                            }
+                            else{
+                                if($isDisliked){
+                                    $likeOnclick = "";
+                                }else{
+                                    $likeOnclick = 'onclick="SubmitLike(1)"';
+                                }
+                            }
+
+                            
+                            $dislikeOnclick = "";
+
+                            if($isDisliked){
+                                $dislikeOnclick = 'onclick="SubmitLike(-2)"';
+                            }
+                            else{
+                                    if($isLiked){
+                                        $dislikeOnclick = "";
+                                    }else{
+                                        $dislikeOnclick = 'onclick="SubmitLike(0)"';
+                                    }
+                                }
+                            }else{
+                                $likeOnclick = "";
+                                $like = "";
+                                $dislikeOnclick = "";
+                                $dislike = "";
+                            }
+
 
                         echo '
                         <div class="post-header">
@@ -100,6 +167,16 @@ else
                             <span class="share-text">Paylaş</span>
                             <i class="fa-solid fa-ellipsis-vertical"></i>
                         </div>
+                        <form action="../scripts/likePost.php" method="post">
+                            <div class="likeContainer">
+                                <div class="likes">
+                                    <i class=\'fa-solid fa-thumbs-up\' '.$likeOnclick.' '.$like.'></i>
+                                    <span class="likeCount">'.$postLikeRow["count"].'</span>
+                                    <i class="fa-solid fa-thumbs-down" '.$dislikeOnclick.' '.$dislike.'></i>
+                                    <span class="dislikeCount">'.$postDislikeRow["count"].'</span>
+                                </div>
+                            </div>
+                        </form> 
                         ';
                     }
                 ?>
@@ -183,9 +260,12 @@ else
                 </div>
             </div>
             <div class="menu-item-container">
-                <div class="search-container">
-                    <input type="text" name="search" id="search" placeholder="Enter Keywords..." />
-                </div>
+                <form action="../pages/search.php" method="GET">
+                    <div class="search-container">
+                        <input type="text" name="keyword" id="keyword" placeholder="Ara..." />
+                        <input type="submit" class="search-btn" value="ARA"/>
+                    </div>
+                </form>
             </div>
             <div class="menu-item-container">
                 <div class="menu-item-head">

@@ -7,7 +7,7 @@
     flex-direction: column;
 }
 
-.content input, select{
+.content input:not(input[type="file"]), select{
     outline: none;
     margin-top: 15px;
     width: 100%;
@@ -18,6 +18,12 @@
     transition: 200ms ease-in-out;
     padding: 0;
 }
+
+.content input[type="file"]{
+    margin-top: 15px;
+    padding-bottom: 15px;
+}
+
 
 .content label{
     margin-top: 35px;

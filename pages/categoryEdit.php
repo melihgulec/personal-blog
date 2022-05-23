@@ -17,18 +17,27 @@ $category = $getCategoryData->fetch_assoc();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Kategori Düzenle</title>
     <?php include("../scripts/panelBaseStyles.php") ?>
     <link rel="stylesheet" href="../styles/categoryEdit.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function editCategory() {
             var categoryName = document.getElementById("categoryName").value;
-
-            $.post("../scripts/panelCategoryActions.php", {categoryId: <?php echo $category['id'] ?>, categoryName: categoryName, actionId: 1},
+            
+            if(categoryName === ""){
+                Swal.fire({
+                                heightAuto: false,
+                                title: "Başarısız.",
+                                text: "Tüm alanlar doldurulmalıdır.",
+                                icon: "error"
+                });
+            }else{
+                $.post("../scripts/panelCategoryActions.php", {categoryId: <?php echo $category['id'] ?>, categoryName: categoryName, actionId: 1},
                 function(data) {
                     $('#results').html(data);
             });
+            }
         }
     </script>
 </head>

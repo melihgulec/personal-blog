@@ -13,16 +13,44 @@ $post_query = $connection->query("SELECT * FROM post");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Yazılar</title>
     <?php include("../scripts/panelBaseStyles.php") ?>
     <link rel="stylesheet" href="../styles/postList.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready( function () {
+            $('#table_id').DataTable(
+                {
+                    "order": [0, "desc"],
+                },
+            );
+        } );
+    </script>
+
     <script>
         function deletePost(postId) {
-            $.post("../scripts/panelPostActions.php", {postId: postId, actionId: 2},
-                function(data) {
-                    $('#results').html(data);
-            });
+            Swal.fire({
+                title: 'Emin misin?',
+                text: "Bu durum geri alınamaz!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet, sil!',
+                cancelButtonText: 'İptal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post("../scripts/panelPostActions.php", {postId: postId, actionId: 2},
+                    function(data) {
+                        $('#results').html(data);
+                    });
+                }
+            })
         }
     </script>
 </head>
@@ -33,22 +61,25 @@ $post_query = $connection->query("SELECT * FROM post");
             <h3>Yazı Listesi.</h3>
             <button onclick="location.href = 'postAdd.php'">Yazı Ekle</button>
         </div>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Başlık</th>
-                <th>İçerik</th>
-                <th>Tarih</th>
-                <th>Fotoğraf</th>
-                <th>Kullanıcı ID</th>
-                <th>Kategori ID</th>
-                <th>İşlem</th>
-            </tr>
-            <?php 
+        <table id="table_id" class="display">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Başlık</th>
+                        <th>İçerik</th>
+                        <th>Tarih</th>
+                        <th>Fotoğraf</th>
+                        <th>Kullanıcı ID</th>
+                        <th>Kategori ID</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php 
                 while($post = $post_query->fetch_assoc()){
 
                     $description = $post['Description'];
-                    $description = (strlen($description) > 180) ? substr($description,0,180).'...' : $description;
+                    $description = (strlen($description) > 75) ? substr($description,0,75).'...' : $description;
 
                     echo '
                         <tr>
@@ -58,7 +89,7 @@ $post_query = $connection->query("SELECT * FROM post");
                             <td>
                                 '.$post['Title'].'
                             </td>
-                            <td width="700px">
+                            <td>
                                 '.$description.'
                             </td>
                             <td>
@@ -83,7 +114,8 @@ $post_query = $connection->query("SELECT * FROM post");
                     ';
                 }
             ?>
-        </table>
+                </tbody>
+            </table>
     </div>
     <div id="results"></div>
 </body>

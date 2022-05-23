@@ -1,45 +1,131 @@
-.content
+/*.content
 {
   display: grid;
   grid-template-columns: auto auto auto;
+}*/
+
+.content{
+  display: flex;
+  flex-direction:  column;
+  padding: 5px;
 }
 
-.card{
-    display: flex;
+.statisticsContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.statisticsContainer .cardContainer{
+  margin-right: 45px;
+  margin-bottom: 15px;
+}
+
+.cardContainer{
+  height: 150px;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 320px;
+}
+
+.cardIconItem{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cardIconItem i{
+  font-size: 20px;
+}
+
+.cardIconItemTitle{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+}
+.cardIconItemTitle p{
+  margin: 2px;
+}
+
+.cardIconItemTitle p:nth-child(2){
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.baseContainer{
+  border: 1px solid #eee;
+  width: 100%;
+}
+
+.infoCard{
+  height: 320px;
+  width: 300px;
+  border: 1px solid black;
+}
+
+td{
+  padding-left: 12px;
+}
+
+table, th, td{
+  border: 1px solid #e2e2e2;
+  border-collapse: collapse;
+}
+
+table{
+  height: 100%;
+}
+
+table th{
+  height: 45px;
+}
+
+table tr:nth-child(2n){
+  background-color: #f5f4f4;
+}
+
+.tables{
+  display: flex;
+  flex-direction: column;
+  padding-bottom:100px;
+}
+
+.tables .item:not(:first-child){
+  margin-top: 85px;
+}
+
+.tables .item:nth-child(1){
+  padding-right: 15px;
+}
+
+.tables .item table{
+  width: 100%;
+}
+
+.banner{
+  width: 100%;
+  height: 85px;
+  margin-bottom: 25px;
+}
+
+@media only screen and (max-width: 768px) {
+  .statisticsContainer{
     flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 250px;
-    height: 380px;
-    border: 1px solid black;
-    border-radius: 3px;
-    margin-right: 25px;
-  }
-  
-  .iconContainer{
-    display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 35px;
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
-    background-color: #fff;
-    border: 1px solid crimson;
+    align-items: center;
   }
-  
-  .labelGroup{
-    display: flex;
+
+  .banner{
+    padding-top:4px;
+    padding-left: 25px;
+  }
+
+  .tables{
     flex-direction: column;
-    text-align: center;
   }
-  
-  .labelGroup label:first-child{
-    font-weight: bold;
-    font-size: 18px;
-  }
-  
-  .labelGroup label{
-    padding: 5px;
-    font-size: 15px;
-  }
+}

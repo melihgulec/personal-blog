@@ -45,7 +45,7 @@ box-shadow: 10px 10px 103px -30px rgba(148,148,148,1);
     background-color: #f6f6f5;
 }
 
-.container form input[type="button"]{
+.container form input[type="submit"]{
     background-color: #000;
     color:white;
     border:0;

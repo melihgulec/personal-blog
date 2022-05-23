@@ -1,78 +1,67 @@
 <?php
+include("../scripts/connection.php");
+include("../scripts/routing.php");
 
-            $userName = $_POST["userName"];
-            $userSurname = $_POST["userSurname"];
-            $userMail = $_POST["userMail"];
-            $userPassword = $_POST["userPassword"];
-            $dateOfBirth = $_POST["dateOfBirth"];
-            
-            include("../scripts/connection.php");
+$userName = $_POST["userName"];
+$userSurname = $_POST["userSurname"];
+$userMail = $_POST["userMail"];
+$userPassword = $_POST["userPassword"];
+$dateOfBirth = $_POST["dateOfBirth"];
 
-            if($userName === "" || $userSurname === "" || $userMail === "" || $userPassword === "" || $dateOfBirth === "" ){
-                echo $userName.' - '.$userSurname.' - '.$userMail.' - '.$userPassword.' - '.$dateOfBirth;
-                echo '<script>
-                Swal.fire({
-                    heightAuto: false,
-                    title: "Hata!",
-                    text: "Formdaki tüm alanlar doldurulmalıdır.",
-                    icon: "error"
-                });
-                </script>';
+$selectquery="SELECT id FROM user ORDER BY id DESC LIMIT 1";
+$result = $connection->query($selectquery);
+$row = $result->fetch_assoc();
+$frominsert = $row['id'];
 
-                exit();
-            }
+$lastid = $frominsert + 1;
+
+$goPath = "../pages/register.php?";
 
 
-            $userQuery = $connection->query("SELECT * FROM user WHERE Email = '".$userMail."' AND password = '".$userPassword."'");
-            $row = $userQuery->num_rows;
-            $userDetails = $userQuery->fetch_assoc();
+if( empty($userName) || empty($userSurname) || empty($userMail) || empty($userPassword) || empty($dateOfBirth) || empty($_FILES["photo"]["tmp_name"])){
+    go($goPath."success=2");
 
-            if($row == 0){
+    exit();
+}
 
-                $sqlStr = "INSERT INTO user(Name, Surname, Email,  Password, DateOfBirth, RoleID, image) 
-                VALUES(
-                    '".$userName."',
-                    '".$userSurname."',
-                    '".$userMail."',
-                    '".$userPassword."',
-                    '".$dateOfBirth."',
-                    '2',
-                    'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png'
-                    )
-                ";
 
-                if($connection -> query($sqlStr) === TRUE){
-                    echo '<script>
-                        Swal.fire({
-                            heightAuto: false,
-                            title: "Tamam!",
-                            text: "Kayıt başarıyla oluşturuldu.",
-                            icon: "success"
-                        });
-                    </script>';
-                }
-                else{
-                    echo '<script>
-                        Swal.fire({
-                            heightAuto: false,
-                            title: "Hata!.",
-                            text: "Kayıt oluşturulurken bir sorunla karşılaşıldı.\nHata:\n'.$connection->error.'",
-                            icon: "error"
-                        });
-                    </script>';
-                }
+$userQuery = $connection->query("SELECT * FROM user WHERE Email = '".$userMail."'");
+$row = $userQuery->num_rows;
+$userDetails = $userQuery->fetch_assoc();
 
-                
-                
-            }else{
-                echo '<script>
-                    Swal.fire({
-                        heightAuto: false,
-                        title: "Hata!",
-                        text: "Böyle bir e-postaya sahip kullanıcı bulunmaktadır. Lütfen başka bir e-posta deneyiniz.",
-                        icon: "error"
-                    });
-                </script>';
-            }
+if($row == 0){
+
+    $sqlStr = "INSERT INTO user(Name, Surname, Email,  Password, DateOfBirth, RoleID, image) 
+    VALUES(
+        '".$userName."',
+        '".$userSurname."',
+        '".$userMail."',
+        '".password_hash($userPassword, PASSWORD_DEFAULT)."',
+        '".$dateOfBirth."',
+        '3',
+        '$lastid.jpg'
+        )
+    ";
+
+    if($connection -> query($sqlStr) === TRUE){
+    
+        $path = "../assets/user/images/$lastid";
+        $photo = $path.".jpg";
+        
+        move_uploaded_file($_FILES["photo"]["tmp_name"], $photo);
+
+        go($goPath."success=1");
+
+    }
+    else{
+        go($goPath."success=0");
+
+    }
+
+    
+    
+}else{
+    go($goPath."success=3");
+}
 
 ?>

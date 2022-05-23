@@ -11,7 +11,7 @@ $post_query = $connection->query("SELECT * FROM post WHERE categorie_id = ".$cat
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ana Sayfa</title>
+    <title>Kategori</title>
     <link rel="stylesheet" href="../styles/normalize.css">
     <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/index.css">
@@ -34,7 +34,7 @@ $post_query = $connection->query("SELECT * FROM post WHERE categorie_id = ".$cat
                     $categorieRow = $categorie_query->fetch_assoc();
 
                     $description = $row['Description'];
-                    $description = (strlen($description) > 180) ? substr($description,0,180).'...' : $description;
+                    $description = (strlen($description) > 500) ? substr($description,0,500).'...' : $description;
 
                     echo '
                     <div class="post-container">
@@ -98,9 +98,12 @@ $post_query = $connection->query("SELECT * FROM post WHERE categorie_id = ".$cat
                 </div>
             </div>
             <div class="menu-item-container">
-                <div class="search-container">
-                    <input type="text" name="search" id="search" placeholder="Enter Keywords..." />
-                </div>
+                <form action="../pages/search.php" method="GET">
+                    <div class="search-container">
+                        <input type="text" name="keyword" id="keyword" placeholder="Ara..." />
+                        <input type="submit" class="search-btn" value="ARA"/>
+                    </div>
+                </form>
             </div>
             <div class="menu-item-container">
                 <div class="menu-item-head">

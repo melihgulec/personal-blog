@@ -8,6 +8,8 @@ if(isset($_SESSION['loggedIn']) && isset($_SESSION['isAdmin'])){
     }
 }
 
+$success = isset($_GET["success"]) == false ? -1 : $_GET['success'];
+
 ?>
 
 <!DOCTYPE html>
@@ -16,28 +18,38 @@ if(isset($_SESSION['loggedIn']) && isset($_SESSION['isAdmin'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Panel Girişi</title>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="../styles/panelLogin.css">
     <script>
-        function SubmitFormData() {
-            var email = $("#email").val();
-            var password = $("#password").val();
-            $.post("../scripts/panelLoginCheck.php", { email: email, password: password},
-                function(data) {
-                    let result = JSON.parse(data);
-                    
-                    if(result.status === true){
-                        $('#results').html(result.data);
-                        const timeOut = setTimeout(() => {
-                            location.href = "../pages/panel.php";
-                        }, 3000);
-                    }else{
-                        $('#results').html(result.data);
+        $(document).ready(()=>{
+            <?php
+        
+                if($success != -1){
+                    if($success == 2 )
+                    {
+                        echo '
+                            Swal.fire({
+                                heightAuto: false,
+                                title: "Başarısız.",
+                                text: "Boş alanlar doldurulmalıdır.",
+                                icon: "error"
+                            });
+                        ';
+                    }else if($success == 0 ){
+                        echo '
+                        Swal.fire({
+                            heightAuto: false,
+                            title: "Başarısız.",
+                            text: "Kullanıcı bulunamadı.",
+                            icon: "error"
+                        });
+                    ';
                     }
-            });
-        }
+                }
+            ?> 
+        });
     </script>
 </head>
 <body>
@@ -54,7 +66,7 @@ if(isset($_SESSION['loggedIn']) && isset($_SESSION['isAdmin'])){
                 <input type="password" id="password" name="password">
             </div>
             <div>
-                <input type="button" value="GİRİŞ" onclick="SubmitFormData();">
+                <input type="submit" value="GİRİŞ">
             </div>
         </form>
     </div>
