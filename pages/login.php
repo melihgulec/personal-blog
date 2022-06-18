@@ -2,6 +2,8 @@
 include("../components/header.php");
 include('../scripts/connection.php');
 include('../scripts/routing.php');
+include('../helpers/swalHelper.php');
+
 
 if(isset($_SESSION['loggedIn'])){
     if($_SESSION['loggedIn'] === true){
@@ -59,6 +61,14 @@ if(isset($_COOKIE["userEmail"]) && isset($_COOKIE["rememberMe"])){
                             icon: "error"
                         });
                     ';
+                    }else if($success == 3){
+                        echo '
+                        Swal.fire({
+                            heightAuto: false,
+                            title: "Başarısız.",
+                            text: "Uygun mail adresi girilmelidir..",
+                            icon: "error"
+                        });';
                     }
                 }
             ?> 

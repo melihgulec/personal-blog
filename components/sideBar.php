@@ -41,6 +41,10 @@ echo '
             <i class="fa-solid fa-id-card"></i>
             <a href="../pages/rolesList.php">Roller</a>
           </div>
+          <div class="itemGroup">
+            <i class="fa-solid fa-comment"></i>
+            <a href="../pages/commentList.php">Yorumlar</a>
+          </div>
         </div>
         <div class="headItem">
           <label class="headLabel">Ekle</label>

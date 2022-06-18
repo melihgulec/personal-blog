@@ -12,6 +12,13 @@
         exit();
     }
 
+    $sanitizedMail = filter_var($postEmail, FILTER_SANITIZE_EMAIL);
+
+    if(!filter_var($sanitizedMail, FILTER_VALIDATE_EMAIL)){
+        go($goPath."success=3");
+        exit();
+    }
+
     $adminRoleQuery = $connection->query("SELECT id FROM role WHERE Name='Yönetici'");
     $adminRoleId = $adminRoleQuery->fetch_assoc();
 

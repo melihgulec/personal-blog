@@ -46,7 +46,15 @@ $success = isset($_GET["success"]) == false ? -1 : $_GET['success'];
                             icon: "error"
                         });
                     ';
-                    }
+                }else if($success == 3){
+                    echo '
+                    Swal.fire({
+                        heightAuto: false,
+                        title: "Başarısız.",
+                        text: "Uygun mail adresi girilmelidir..",
+                        icon: "error"
+                    });';
+                }
                 }
             ?> 
         });

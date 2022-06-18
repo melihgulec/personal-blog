@@ -13,6 +13,13 @@
         exit();
     }
 
+    $sanitizedMail = filter_var($postEmail, FILTER_SANITIZE_EMAIL);
+
+    if(!filter_var($sanitizedMail, FILTER_VALIDATE_EMAIL)){
+        go($goPath."success=3");
+        exit();
+    }
+
     $userQuery = $connection->query("SELECT * FROM user WHERE Email = '".$postEmail."'");
     $row = $userQuery->num_rows;
 
